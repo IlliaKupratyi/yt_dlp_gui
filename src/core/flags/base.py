@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, Any, List
 
 """
-An abstract base class for all flags.
+An abstract base class for all flags
 Each flag is responsible for:
 - its own validation
 - formatting into CLI arguments
@@ -21,17 +21,17 @@ class BaseFlag(ABC):
         self.required = required
         self.validate()
 
-    """Validating the flag value. Called during initialization."""
+    """Validating the flag value. Called during initialization"""
     @abstractmethod
     def validate(self) -> None:
         pass
 
-    """Formatting into CLI arguments."""
+    """Formatting into CLI arguments"""
     @abstractmethod
     def to_args(self) -> List[str]:
         pass
 
-    """Checks that the flag is valid (does not throw exceptions)."""
+    """Checks that the flag is valid (does not throw exceptions)"""
     def is_valid(self) -> bool:
         try:
             self.validate()
@@ -47,6 +47,6 @@ class BaseFlag(ABC):
             return False
         return self.value == other.value
 
-    """Creates a copy of the flag."""
+    """Creates a copy of the flag"""
     def clone(self):
         return self.__class__(self.value, self.required)
