@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/yt_dlp_GUI.iml" filepath="$PROJECT_DIR$/.idea/yt_dlp_GUI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/yt_dlp_gui.iml" filepath="$PROJECT_DIR$/.idea/yt_dlp_gui.iml" />
     </modules>
   </component>
 </project>
