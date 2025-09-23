@@ -20,6 +20,5 @@ class OutputPathsFlag(BaseFlag):
         except (ValueError, TypeError) as e:
             raise FlagValidatorError(f"Invalid --paths value: {str(e)}") from e
 
-    """Returns the flag as a CLI argument list: ['--paths', value]."""
     def to_args(self) -> List[str]:
         return ["--" + self.name, self.value]

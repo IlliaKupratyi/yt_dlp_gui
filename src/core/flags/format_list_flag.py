@@ -10,8 +10,3 @@ class FormatListFlag(BaseFlag):
 
     def _validate(self) -> None:
         pass
-
-    def to_args(self) -> List[str]:
-        return ["--" + self.name, ""]
-
-

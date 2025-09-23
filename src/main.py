@@ -1,12 +1,14 @@
 from src.core.config import DATA_DIR
 from src.core.flags.format_flag import FormatFlag
 from src.core.flags.output_paths_flag import OutputPathsFlag
+from src.core.flags.write_link import WriteLinkFlag
 from src.core.runner import YTDLPRunner
 
 def main():
     runner = YTDLPRunner()
     runner.add_flag(FormatFlag("best"))
     runner.add_flag(OutputPathsFlag(DATA_DIR))
+    runner.add_flag(WriteLinkFlag())
 
     def print_line(line):
         print(f"{line}")

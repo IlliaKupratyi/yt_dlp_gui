@@ -26,9 +26,8 @@ class BaseFlag(ABC):
         pass
 
     """Formatting into CLI arguments"""
-    @abstractmethod
     def to_args(self) -> List[str]:
-        pass
+        return ["--" + self.name]
 
     """Checks that the flag is valid (does not throw exceptions)"""
     def is_valid(self) -> bool:

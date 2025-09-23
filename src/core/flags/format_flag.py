@@ -17,5 +17,3 @@ class FormatFlag(BaseFlag):
 
     def to_args(self) -> List[str]:
         return ["--" + self.name, self.value]
-
-
