@@ -1,16 +1,32 @@
-# This is a sample Python script.
+from typing import List
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+from src.core.flags.base import BaseFlag
+from src.core.runner import YTDLPRunner
 
 
-# Press the green button in the gutter to run the script.
+class TestFormatFlag(BaseFlag):
+    name = "format"
+
+    def __init__(self, value: str = "best"):
+        super().__init__(value, True)
+
+    def validate(self):
+        pass
+
+    def to_args(self) -> List[str]:
+        return ["--" + self.name, self.value]
+
+def main():
+    runner = YTDLPRunner()
+    runner.add_flag(TestFormatFlag("best"))
+
+    def print_line(line):
+        print(f"{line}")
+
+    result = runner.run(url="https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+               on_output=print_line)
+
+    print(f"Finished with code {result['return_code']}")
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()

@@ -41,7 +41,7 @@ class YTDLPRunner:
         for flag in self.flags:
             cmd.extend(flag.to_args())
 
-        cmd.extend(url)
+        cmd.append(url)
 
         return cmd
 
