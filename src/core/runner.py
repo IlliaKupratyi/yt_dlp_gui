@@ -2,6 +2,7 @@ import subprocess
 from typing import List, Optional, Callable, Dict, Any
 
 from src.core.config import Config
+from src.core.exception import FlagValidatorError
 from src.core.flags.base import BaseFlag
 
 """
@@ -60,12 +61,14 @@ class YTDLPRunner:
                                    bufsize=1,
                                    encoding="utf-8",
                                    errors="replace") # Launch yt-dlp as a subprocess
-
-        for line in process.stdout: # Stream stdout line-by-line
-            line = line.rstrip('\r\n')
-            stdout_lines.append(line)
-            if on_output:
-                on_output(line) # Invoke on_output callback for each line
+        if process.stdout is not None:
+            for line in process.stdout: # Stream stdout line-by-line
+                line = line.rstrip('\r\n')
+                stdout_lines.append(line)
+                if on_output:
+                    on_output(line) # Invoke on_output callback for each line
+        else:
+            raise RuntimeError("Stdout cannot be None")
 
         return_code = process.wait() # Wait for process completion
 

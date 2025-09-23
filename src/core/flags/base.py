@@ -12,18 +12,17 @@ Each flag is responsible for:
 class BaseFlag(ABC):
     name: str = "" # flag name
     short_name: Optional[str] = "" # flag shor name
-    value: Optional[Any] = None # flag value (string, number, list, enum, etc.)
     required: bool = False # is this flag mandatory
     deprecated: bool = False # is the flag obsolete
 
     def __init__(self, value: Any = None, required: bool = False):
         self.value = value
         self.required = required
-        self.validate()
+        self._validate()
 
     """Validating the flag value. Called during initialization"""
     @abstractmethod
-    def validate(self) -> None:
+    def _validate(self) -> None:
         pass
 
     """Formatting into CLI arguments"""

@@ -10,7 +10,7 @@ class TestFormatFlag(BaseFlag):
     def __init__(self, value: str = "best"):
         super().__init__(value, True)
 
-    def validate(self):
+    def _validate(self):
         pass
 
     def to_args(self) -> List[str]:
