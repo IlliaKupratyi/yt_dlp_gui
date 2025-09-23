@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Main + first working version">
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/flags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/flags/output_paths_flag.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/path_validator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_path_validator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/base.py" afterDir="false" />
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Path validator">
+      <change beforePath="$PROJECT_DIR$/src/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/flags/output_paths_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/output_paths_flag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/runner.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
@@ -67,7 +61,7 @@
       <recent name="D:\Projects\pythonProjects\yt_dlp_GUI" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.pytest in tests">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="yt_dlp_gui" />
       <option name="ENV_FILES" value="" />
@@ -159,7 +153,7 @@
       <workItem from="1758529518295" duration="2402000" />
       <workItem from="1758534436586" duration="2270000" />
       <workItem from="1758536735976" duration="25000" />
-      <workItem from="1758632870045" duration="8699000" />
+      <workItem from="1758632870045" duration="9394000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -217,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758634460612</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Path validator">
+      <option name="closed" value="true" />
+      <created>1758642510970</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1758642510970</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,16 +244,12 @@
     <MESSAGE value="Exceptions" />
     <MESSAGE value="YTDLPRunner" />
     <MESSAGE value="Main + first working version" />
-    <option name="LAST_COMMIT_MESSAGE" value="Main + first working version" />
+    <MESSAGE value="Path validator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Path validator" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/main.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tests/test_path_validator.py</url>
           <line>41</line>
@@ -269,6 +267,6 @@
     <SUITE FILE_PATH="coverage/yt_dlp_gui$test_path_validator.coverage" NAME="test_path_validator Coverage Results" MODIFIED="1758640517150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1758642486254" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:\Projects\pythonProjects\yt_dlp_gui" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$runner.coverage" NAME="runner Coverage Results" MODIFIED="1758634057776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/core" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1758636978017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1758642913833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

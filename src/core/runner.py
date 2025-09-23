@@ -1,8 +1,7 @@
 import subprocess
 from typing import List, Optional, Callable, Dict, Any
 
-from src.core.config import Config
-from src.core.exception import FlagValidatorError
+from src.core.config import YT_DLP_PATH
 from src.core.flags.base import BaseFlag
 
 """
@@ -17,7 +16,7 @@ class YTDLPRunner:
     which automatically selects 'yt-dlp.exe' on Windows or 'yt-dlp' on Unix-like systems.
     """
     def __init__(self, yt_dlp_path: str | None = None):
-        self.yt_dlp_path: str = yt_dlp_path or Config.YT_DLP_PATH
+        self.yt_dlp_path: str = yt_dlp_path or YT_DLP_PATH
         self.flags: List[BaseFlag] = []
 
     """

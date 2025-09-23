@@ -1,6 +1,8 @@
 from typing import List
 
+from src.core.config import DATA_DIR
 from src.core.flags.base import BaseFlag
+from src.core.flags.output_paths_flag import OutputPathsFlag
 from src.core.runner import YTDLPRunner
 
 
@@ -19,6 +21,7 @@ class TestFormatFlag(BaseFlag):
 def main():
     runner = YTDLPRunner()
     runner.add_flag(TestFormatFlag("best"))
+    runner.add_flag(OutputPathsFlag(DATA_DIR))
 
     def print_line(line):
         print(f"{line}")
