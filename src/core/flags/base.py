@@ -33,7 +33,7 @@ class BaseFlag(ABC):
     """Checks that the flag is valid (does not throw exceptions)"""
     def is_valid(self) -> bool:
         try:
-            self.validate()
+            self._validate()
             return True
         except Exception:
             return False
