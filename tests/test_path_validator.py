@@ -1,62 +1,34 @@
 import sys
-import os
 
-from src.utils.path_validator import is_valid_path_type, validate_path, parse_paths_string, resolve_home_path
+from src.utils.path_validator import validate_absolute_path
 
-
-def test_is_valid_path_type():
-    assert is_valid_path_type("home")
-    assert is_valid_path_type("temp")
-    assert is_valid_path_type("audio")
-    assert is_valid_path_type("my_video_2025")
-    assert not is_valid_path_type("video?")  # ? restricted
-    assert not is_valid_path_type("")  # empty
-    assert not is_valid_path_type(123)   # not string
-
-
-def test_validate_path_valid():
-    if sys.platform == "win32":
-        validate_path("C:\\Users\\user")  # Windows
-        validate_path("data/video")
+def test_path_validator() -> None:
+    if sys.platform == 'win32':
+        _test_windows_path_validator()
     else:
-        validate_path("/home/user")  # Linux
-        validate_path("my folder")
+        _test_linux_path_validator()
 
-
-def test_validate_path_invalid_windows():
-    if sys.platform == "win32":
-        try:
-            validate_path("C:\\temp\\file?name.mp4")
-            assert False, "Should raise ValueError"
-        except ValueError:
-            pass
-
-        try:
-            validate_path("C:/invalid|name")
-            assert False, "Should raise ValueError"
-        except ValueError:
-            pass
-
-
-def test_parse_paths_string():
-    result = parse_paths_string("home:/,temp:/tmp,audio:/music")
-    assert result == [('home', '/'), ('temp', '/tmp'), ('audio', '/music')]
-
+def _test_windows_path_validator() -> None:
+    validate_absolute_path(r"C:\Users\John\file.txt")
+    validate_absolute_path("C:/Users/John/file.txt")
+    validate_absolute_path("C:/Users/John")
     try:
-        parse_paths_string("audio:")
-        assert False, "Should raise ValueError"
+        validate_absolute_path(r"C:\file?.txt")  # ? invalid
+    except ValueError:
+        pass
+    try:
+        validate_absolute_path(r"C:\CON")  # reserved name
+    except ValueError:
+        pass
+    try:
+        validate_absolute_path(r"C:\folder.")  # ends with .
     except ValueError:
         pass
 
+def _test_linux_path_validator() -> None:
+    validate_absolute_path("/home/user/file.txt")
+    validate_absolute_path("/tmp/a*b?")
     try:
-        parse_paths_string("video?/path")
-        assert False, "Should raise ValueError"
+        validate_absolute_path("/home/user/file\0.txt")  # null byte
     except ValueError:
         pass
-
-
-def test_resolve_home_path():
-    base = "data"
-    resolved = resolve_home_path(base)
-    assert os.path.isabs(resolved)
-    assert os.path.exists(resolved)

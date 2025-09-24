@@ -1,6 +1,3 @@
-from idlelib.configdialog import is_int
-from typing import List, Dict
-
 from src.core.flags.format_list_flag import FormatListFlag
 from src.core.runner import YTDLPRunner
 
@@ -8,12 +5,12 @@ from src.core.runner import YTDLPRunner
 Util for listing available formats via yt-dlp -F.
 """
 class FormatLister:
-    def __init__(self, yt_dlp_path: str = None):
+    def __init__(self, yt_dlp_path: str = "yt-dlp"):
         self.runner = YTDLPRunner(yt_dlp_path)
         self.output_formats: list[str] = []
 
     """Returns a list of formats as structured dictionaries."""
-    def get_formats(self, url: str) -> List[Dict[str, str]]:
+    def get_formats(self, url: str) -> list[dict[str, str]]:
 
         def collect_line(line: str) -> None:
             self.output_formats.append(line)
@@ -25,8 +22,8 @@ class FormatLister:
         return self._parse_output()
 
     """Parses a string returned by yt-dlp. Returns a dictionary."""
-    def _parse_output(self) -> List[Dict[str, str]]:
-        formats = []
+    def _parse_output(self) -> list[dict[str, str]]:
+        formats: list[dict[str, str]] = []
         in_table = False
         for line in self.output_formats:
             if line.startswith("ID"):
@@ -37,7 +34,7 @@ class FormatLister:
             parts = line.split()
             if len(parts) < 4:
                 continue
-            if not is_int(parts[0]):
+            if not parts[0].isdigit():
                 continue
             formats.append({
                 "id": parts[0],

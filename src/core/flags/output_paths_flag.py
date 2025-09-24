@@ -1,9 +1,7 @@
-from typing import List
-
 from src.core.config import DATA_DIR
 from src.core.exception import FlagValidatorError
 from src.core.flags.base import BaseFlag
-from src.utils.path_validator import parse_paths_string
+from src.utils.path_validator import validate_absolute_path
 
 """Represents yt-dlp's --paths/-P flag for custom download directories."""
 class OutputPathsFlag(BaseFlag):
@@ -12,13 +10,14 @@ class OutputPathsFlag(BaseFlag):
 
     def __init__(self, value: str = DATA_DIR):
         super().__init__(value=value, required=True)
+        self._validate()
 
     """Validates the --paths string format using the path parser."""
     def _validate(self) -> None:
         try:
-            parse_paths_string(self.value)
+            validate_absolute_path(self.value)
         except (ValueError, TypeError) as e:
             raise FlagValidatorError(f"Invalid --paths value: {str(e)}") from e
 
-    def to_args(self) -> List[str]:
+    def to_args(self) -> list[str]:
         return ["--" + self.name, self.value]

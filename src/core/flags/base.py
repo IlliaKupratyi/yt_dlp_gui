@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Any, List
+from typing import Optional, Any
 
 """
 An abstract base class for all flags
@@ -18,7 +18,6 @@ class BaseFlag(ABC):
     def __init__(self, value: Any = None, required: bool = False):
         self.value = value
         self.required = required
-        self._validate()
 
     """Validating the flag value. Called during initialization"""
     @abstractmethod
@@ -26,7 +25,7 @@ class BaseFlag(ABC):
         pass
 
     """Formatting into CLI arguments"""
-    def to_args(self) -> List[str]:
+    def to_args(self) -> list[str]:
         return ["--" + self.name]
 
     """Checks that the flag is valid (does not throw exceptions)"""

@@ -10,7 +10,7 @@ lister = FormatLister()
 @patch.object(YTDLPRunner, 'run')
 def test_get_formats_calls_runner_and_parses_output(mock_run):
     mock_output_lines = [
-        "ID EXT RESOLUTION FPS CH | FILESIZE TBR PROTO | VCODEC VBR ACODEC ABR ASR MORE INFO",
+        "ID  EXT   RESOLUTION FPS CH |   FILESIZE    TBR PROTO | VCODEC           VBR ACODEC      ABR ASR MORE INFO",
         "------------------------------------------------------------------------------------------------------",
         "137 mp4   1920x1080   25    | 6.69MiB  3020k https    | avc1.640028 3020k video only 1080p, mp4_dash",
         "140 m4a   audio only      2 |    3.29MiB   130k https | audio only mp4a.40.2  130k 44k [en] medium, m4a_dash",

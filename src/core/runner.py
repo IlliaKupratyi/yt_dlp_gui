@@ -1,5 +1,5 @@
 import subprocess
-from typing import List, Optional, Callable, Dict, Any
+from typing import Optional, Callable, Any
 
 from src.core.config import YT_DLP_PATH
 from src.core.flags.base import BaseFlag
@@ -17,7 +17,7 @@ class YTDLPRunner:
     """
     def __init__(self, yt_dlp_path: str | None = None):
         self.yt_dlp_path: str = yt_dlp_path or YT_DLP_PATH
-        self.flags: List[BaseFlag] = []
+        self.flags: list[BaseFlag] = []
 
     """
     Add a flag object to the command configuration.
@@ -32,11 +32,11 @@ class YTDLPRunner:
     """
     Construct the complete command line as a list of strings for subprocess.Popen.
     """
-    def build_command(self, url: str) -> List[str]:
+    def build_command(self, url: str) -> list[str]:
         if not url:
             raise ValueError("url cannot be empty")
 
-        cmd: List[str] = [self.yt_dlp_path]
+        cmd: list[str] = [self.yt_dlp_path]
 
         for flag in self.flags:
             cmd.extend(flag.to_args())
@@ -48,9 +48,9 @@ class YTDLPRunner:
     """
     Execute yt-dlp with the configured flags and stream output in real time.
     """
-    def run(self, url: str, on_output: Optional[Callable[[str], None]] = None) -> Dict[str, Any]:
+    def run(self, url: str, on_output: Optional[Callable[[str], None]] = None) -> dict[str, Any]:
         cmd = self.build_command(url) # Build the command
-        stdout_lines: List[str] = []
+        stdout_lines: list[str] = []
 
         process = subprocess.Popen(cmd,
                                    stdout=subprocess.PIPE,

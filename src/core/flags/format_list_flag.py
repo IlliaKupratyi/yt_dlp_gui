@@ -1,4 +1,3 @@
-from typing import List
 from src.core.flags.base import BaseFlag
 
 class FormatListFlag(BaseFlag):
