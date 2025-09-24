@@ -2,7 +2,7 @@ from src.core.flags.base import BaseFlag
 
 
 class WriteSubsFlag(BaseFlag):
-    name = "write_subs"
+    name = "write-subs"
     short_name = ""
 
     def __init__(self):

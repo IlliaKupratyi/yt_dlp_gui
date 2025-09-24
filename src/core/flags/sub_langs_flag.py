@@ -1,8 +1,10 @@
+import argparse
+
 from src.core.flags.base import BaseFlag
 
 
 class SubLangsFlag(BaseFlag):
-    name: str = "sub_langs"
+    name: str = "sub-langs"
     short_name: str = ""
 
     def __init__(self, languages : list[str]):
@@ -11,3 +13,6 @@ class SubLangsFlag(BaseFlag):
 
     def _validate(self) -> None:
         pass
+
+    def to_args(self) -> list[str]:
+        return ["--" + self.name, self.value]
