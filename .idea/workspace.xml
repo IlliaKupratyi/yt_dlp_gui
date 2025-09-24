@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="NoOverwritesFlag">
-      <change afterPath="$PROJECT_DIR$/src/core/flags/ignore_errors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/flags/progress_flag.py" afterDir="false" />
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="IgnoreErrorsFlag">
+      <change afterPath="$PROJECT_DIR$/src/core/flags/preset_alias_flag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
@@ -36,28 +35,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.pytest in tests.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.runner.executor": "Run",
-    "Python.test_path_validator.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Projects/pythonProjects/yt_dlp_GUI",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.pytest in tests.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.runner.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_path_validator.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/pythonProjects/yt_dlp_GUI&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\pythonProjects\yt_dlp_gui\src\core\data_class" />
@@ -159,7 +158,8 @@
       <workItem from="1758536735976" duration="25000" />
       <workItem from="1758632870045" duration="10929000" />
       <workItem from="1758645733627" duration="9228000" />
-      <workItem from="1758709880039" duration="10149000" />
+      <workItem from="1758709880039" duration="10883000" />
+      <workItem from="1758725765878" duration="768000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -289,7 +289,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758720068866</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="IgnoreErrorsFlag">
+      <option name="closed" value="true" />
+      <created>1758720458888</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1758720458888</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,7 +331,8 @@
     <MESSAGE value="subtitle_lister" />
     <MESSAGE value="WriteSubsFlag + SubLangsFlag" />
     <MESSAGE value="NoOverwritesFlag" />
-    <option name="LAST_COMMIT_MESSAGE" value="NoOverwritesFlag" />
+    <MESSAGE value="IgnoreErrorsFlag" />
+    <option name="LAST_COMMIT_MESSAGE" value="IgnoreErrorsFlag" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
