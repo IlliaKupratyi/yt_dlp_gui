@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="subtitle_lister">
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="NoOverwritesFlag">
+      <change afterPath="$PROJECT_DIR$/src/core/flags/ignore_errors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/core/flags/progress_flag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/sub_langs_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/sub_langs_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/write_subs_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/write_subs_flag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,7 +159,7 @@
       <workItem from="1758536735976" duration="25000" />
       <workItem from="1758632870045" duration="10929000" />
       <workItem from="1758645733627" duration="9228000" />
-      <workItem from="1758709880039" duration="9538000" />
+      <workItem from="1758709880039" duration="10149000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -273,7 +273,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758719438443</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="WriteSubsFlag + SubLangsFlag">
+      <option name="closed" value="true" />
+      <created>1758719825350</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1758719825350</updated>
+    </task>
+    <task id="LOCAL-00016" summary="NoOverwritesFlag">
+      <option name="closed" value="true" />
+      <created>1758720068866</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1758720068866</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,7 +321,9 @@
     <MESSAGE value="WriteLinkFlag" />
     <MESSAGE value="Fit path_validator" />
     <MESSAGE value="subtitle_lister" />
-    <option name="LAST_COMMIT_MESSAGE" value="subtitle_lister" />
+    <MESSAGE value="WriteSubsFlag + SubLangsFlag" />
+    <MESSAGE value="NoOverwritesFlag" />
+    <option name="LAST_COMMIT_MESSAGE" value="NoOverwritesFlag" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -327,6 +345,6 @@
     <SUITE FILE_PATH="coverage/yt_dlp_gui$test_path_validator.coverage" NAME="test_path_validator Coverage Results" MODIFIED="1758640517150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1758719508827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$runner.coverage" NAME="runner Coverage Results" MODIFIED="1758634057776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/core" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1758719775907" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1758720175416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
