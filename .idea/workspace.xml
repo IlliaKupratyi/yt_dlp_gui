@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="PresetAliasFlag">
-      <change afterPath="$PROJECT_DIR$/src/core/flags/convert_thumbnails_flag.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/flags/ffmpeg_location_flag.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/flags/write_thumbnail_flag.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/ffmpeg_find.py" afterDir="false" />
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="find_ffmpeg_path, FfmpegLocationFlag, WriteThumbnailFlag, ConvertThumbnailsFlag">
+      <change afterPath="$PROJECT_DIR$/src/core/flags/embed_thumbnail_flag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/flags/convert_thumbnails_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/convert_thumbnails_flag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/flags/preset_alias_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/preset_alias_flag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -163,7 +162,8 @@
       <workItem from="1758632870045" duration="10929000" />
       <workItem from="1758645733627" duration="9228000" />
       <workItem from="1758709880039" duration="10883000" />
-      <workItem from="1758725765878" duration="4409000" />
+      <workItem from="1758725765878" duration="6457000" />
+      <workItem from="1758789799232" duration="2444000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -309,7 +309,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758726553406</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="find_ffmpeg_path, FfmpegLocationFlag, WriteThumbnailFlag, ConvertThumbnailsFlag">
+      <option name="closed" value="true" />
+      <created>1758730245409</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1758730245409</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,7 +353,8 @@
     <MESSAGE value="NoOverwritesFlag" />
     <MESSAGE value="IgnoreErrorsFlag" />
     <MESSAGE value="PresetAliasFlag" />
-    <option name="LAST_COMMIT_MESSAGE" value="PresetAliasFlag" />
+    <MESSAGE value="find_ffmpeg_path, FfmpegLocationFlag, WriteThumbnailFlag, ConvertThumbnailsFlag" />
+    <option name="LAST_COMMIT_MESSAGE" value="find_ffmpeg_path, FfmpegLocationFlag, WriteThumbnailFlag, ConvertThumbnailsFlag" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -367,6 +376,6 @@
     <SUITE FILE_PATH="coverage/yt_dlp_gui$test_path_validator.coverage" NAME="test_path_validator Coverage Results" MODIFIED="1758640517150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1758719508827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$runner.coverage" NAME="runner Coverage Results" MODIFIED="1758634057776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/core" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1758730025404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1758795712738" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

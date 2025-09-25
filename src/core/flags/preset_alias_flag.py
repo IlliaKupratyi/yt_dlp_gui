@@ -7,10 +7,10 @@ from src.core.flags.base import BaseFlag
 class PresetAliasFlag(BaseFlag):
     name = "preset-alias"
     short_name = "t"
+    presets = ["mp3", "aac", "mp4", "mkv"]
 
     def __init__(self, value: str = "mp4"):
         super().__init__(value=value, required=False)
-        self.presets = ["mp3", "aac", "mp4", "mkv"]
         self._validate()
 
 
