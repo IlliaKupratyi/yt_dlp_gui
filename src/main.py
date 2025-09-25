@@ -1,4 +1,4 @@
-from src.core.FlagProcessor import FlagProcessor
+from src.core.flag_processor import FlagProcessor
 from src.core.config.config import DATA_DIR
 from src.core.flags.convert_thumbnails_flag import ConvertThumbnailsFlag
 from src.core.flags.embed_thumbnail_flag import EmbedThumbnailFlag

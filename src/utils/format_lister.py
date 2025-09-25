@@ -14,7 +14,7 @@ class FormatLister:
 
         def collect_line(line: str) -> None:
             self.output_formats.append(line)
-        self.runner.add_flag(FormatListFlag())
+        self.runner.add_flag([FormatListFlag()])
         result = self.runner.run(url, on_output=collect_line)
         if result['return_code'] != 1:
             raise RuntimeError(f"yt-dlp failed: {' '.join(result['stderr'])}")

@@ -22,7 +22,7 @@ class SubtitlesLister:
         def collect_line(line: str) -> None:
             self.subtitles_str.append(line)
 
-        self.runner.add_flag(ListSubsFlag())
+        self.runner.add_flag([ListSubsFlag()])
         result = self.runner.run(url, on_output=collect_line)
 
         if result['return_code'] != 0:

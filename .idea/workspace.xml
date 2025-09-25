@@ -4,28 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="EmbedThumbnailFlag">
-      <change afterPath="$PROJECT_DIR$/src/core/FlagProcessor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/config/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/config/flag_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/config/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/base_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/convert_thumbnails_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/convert_thumbnails_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/embed_thumbnail_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/embed_thumbnail_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/ffmpeg_location_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/ffmpeg_location_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/format_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/format_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/format_list_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/format_list_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/ignore_errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/ignore_errors_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/list_subs_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/list_subs_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/no_overwrites_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/no_overwrites_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/output_paths_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/output_paths_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/preset_alias_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/preset_alias_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/sub_langs_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/sub_langs_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/write_link.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/write_link_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/write_subs_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/write_subs_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/write_thumbnail_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/write_thumbnail_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/runner.py" afterDir="false" />
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="FlagProcessor">
+      <change afterPath="$PROJECT_DIR$/tests/test_flag_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/FlagProcessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flag_processor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/format_lister.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/format_lister.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/subtitles_lister.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/subtitles_lister.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +67,7 @@
       <recent name="D:\Projects\pythonProjects\yt_dlp_GUI" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python tests.pytest in tests">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="yt_dlp_gui" />
       <option name="ENV_FILES" value="" />
@@ -179,7 +163,7 @@
       <workItem from="1758645733627" duration="9228000" />
       <workItem from="1758709880039" duration="10883000" />
       <workItem from="1758725765878" duration="6457000" />
-      <workItem from="1758789799232" duration="13411000" />
+      <workItem from="1758789799232" duration="14819000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -341,7 +325,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758796216982</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="FlagProcessor">
+      <option name="closed" value="true" />
+      <created>1758812629739</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1758812629739</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,7 +371,8 @@
     <MESSAGE value="PresetAliasFlag" />
     <MESSAGE value="find_ffmpeg_path, FfmpegLocationFlag, WriteThumbnailFlag, ConvertThumbnailsFlag" />
     <MESSAGE value="EmbedThumbnailFlag" />
-    <option name="LAST_COMMIT_MESSAGE" value="EmbedThumbnailFlag" />
+    <MESSAGE value="FlagProcessor" />
+    <option name="LAST_COMMIT_MESSAGE" value="FlagProcessor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -404,7 +397,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/yt_dlp_gui$test_path_validator.coverage" NAME="test_path_validator Coverage Results" MODIFIED="1758640517150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1758719508827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1758814017200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$runner.coverage" NAME="runner Coverage Results" MODIFIED="1758634057776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/core" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1758812344190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
