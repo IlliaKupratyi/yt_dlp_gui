@@ -1,8 +1,8 @@
 import subprocess
 from typing import Optional, Callable, Any
 
-from src.core.config import YT_DLP_PATH
-from src.core.flags.base import BaseFlag
+from src.core.config.config import YT_DLP_PATH
+from src.core.flags.base_flag import BaseFlag
 
 """
 Manages execution of yt-dlp via subprocess
@@ -22,11 +22,12 @@ class YTDLPRunner:
     """
     Add a flag object to the command configuration.
     """
-    def add_flag(self, flag: BaseFlag) -> "YTDLPRunner":
-        if not isinstance(flag, BaseFlag):
-            raise TypeError("flag must be of type BaseFlag")
+    def add_flag(self, flag: list[BaseFlag]) -> "YTDLPRunner":
+        for f in flag:
+            if not isinstance(f, BaseFlag):
+                raise TypeError("flag must be of type BaseFlag")
 
-        self.flags.append(flag)
+        self.flags.extend(flag)
         return self
 
     """

@@ -1,5 +1,5 @@
 from src.core.exception import FlagValidatorError
-from src.core.flags.base import BaseFlag
+from src.core.flags.base_flag import BaseFlag
 from src.utils.path_validator import validate_absolute_path
 
 
@@ -8,7 +8,7 @@ class FfmpegLocationFlag(BaseFlag):
     short_name = ""
 
     def __init__(self, value: str = ""):
-        super().__init__(value=value, required=True)
+        super().__init__(value)
         self._validate()
 
     def _validate(self) -> None:

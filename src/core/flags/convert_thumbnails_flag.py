@@ -1,5 +1,5 @@
 from src.core.exception import FlagValidatorError
-from src.core.flags.base import BaseFlag
+from src.core.flags.base_flag import BaseFlag
 
 
 class ConvertThumbnailsFlag(BaseFlag):
@@ -7,10 +7,15 @@ class ConvertThumbnailsFlag(BaseFlag):
     supported_formats = ["png", "jpg", "webp"]
 
     def __init__(self, value: str = "webp"):
-        super().__init__(value, False)
+        super().__init__(value)
+
+        from src.core.flags.write_thumbnail_flag import WriteThumbnailFlag
+        self.requires = [WriteThumbnailFlag]
+
+        self._validate()
 
     def _validate(self) -> None:
-        if self.value not in self.supported_formats:
+        if not isinstance(self.value, str) or self.value not in self.supported_formats:
             raise FlagValidatorError("Not supported format for thumbnail conversion!")
 
     def to_args(self) -> list[str]:

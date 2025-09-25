@@ -1,6 +1,5 @@
-import argparse
-
-from src.core.flags.base import BaseFlag
+from src.core.exception import FlagValidatorError
+from src.core.flags.base_flag import BaseFlag
 
 
 class SubLangsFlag(BaseFlag):
@@ -9,10 +8,14 @@ class SubLangsFlag(BaseFlag):
 
     def __init__(self, languages : list[str]):
         languages_str = ", ".join(languages)
-        super().__init__(value=languages_str, required=False)
+        super().__init__(languages_str)
+
+        from src.core.flags.write_subs_flag import WriteSubsFlag
+        self.requires = [WriteSubsFlag]
 
     def _validate(self) -> None:
-        pass
+        if not isinstance(self.value, str):
+            raise FlagValidatorError("Sub languages must be a string")
 
     def to_args(self) -> list[str]:
         return ["--" + self.name, self.value]

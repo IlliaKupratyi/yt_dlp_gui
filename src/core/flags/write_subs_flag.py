@@ -1,4 +1,4 @@
-from src.core.flags.base import BaseFlag
+from src.core.flags.base_flag import BaseFlag
 
 
 class WriteSubsFlag(BaseFlag):
@@ -6,7 +6,4 @@ class WriteSubsFlag(BaseFlag):
     short_name = ""
 
     def __init__(self):
-        super().__init__(value = "", required=False)
-
-    def _validate(self) -> None:
-        pass
+        super().__init__()

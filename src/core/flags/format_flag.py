@@ -1,5 +1,5 @@
 from src.core.exception import FlagValidatorError
-from src.core.flags.base import BaseFlag
+from src.core.flags.base_flag import BaseFlag
 
 
 class FormatFlag(BaseFlag):
@@ -7,7 +7,11 @@ class FormatFlag(BaseFlag):
     shortname = "f"
 
     def __init__(self, value: str = "best"):
-        super().__init__(value, True)
+        super().__init__(value)
+
+        from src.core.flags.preset_alias_flag import PresetAliasFlag
+        self.conflicts = [PresetAliasFlag]
+
         self._validate()
 
     def _validate(self) -> None:

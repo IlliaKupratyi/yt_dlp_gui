@@ -1,5 +1,7 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from typing import Optional, Any
+
+from src.core.exception import FlagValidatorError
 
 """
 An abstract base class for all flags
@@ -12,15 +14,14 @@ Each flag is responsible for:
 class BaseFlag(ABC):
     name: str = "" # flag name
     short_name: Optional[str] = "" # flag shor name
-    required: bool = False # is this flag mandatory
     deprecated: bool = False # is the flag obsolete
+    requires: list[type['BaseFlag']] = []
+    conflicts: list[type['BaseFlag']] = []
 
-    def __init__(self, value: Any = None, required: bool = False):
+    def __init__(self, value: Any = None):
         self.value = value
-        self.required = required
 
     """Validating the flag value. Called during initialization"""
-    @abstractmethod
     def _validate(self) -> None:
         pass
 
@@ -33,7 +34,7 @@ class BaseFlag(ABC):
         try:
             self._validate()
             return True
-        except Exception:
+        except FlagValidatorError:
             return False
 
     def __repr__(self) -> str:
@@ -46,4 +47,4 @@ class BaseFlag(ABC):
 
     """Creates a copy of the flag"""
     def clone(self):
-        return self.__class__(self.value, self.required)
+        return self.__class__(self.value)

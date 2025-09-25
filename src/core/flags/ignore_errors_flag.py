@@ -1,4 +1,4 @@
-from src.core.flags.base import BaseFlag
+from src.core.flags.base_flag import BaseFlag
 
 
 class IgnoreErrorsFlag(BaseFlag):
@@ -7,6 +7,3 @@ class IgnoreErrorsFlag(BaseFlag):
 
     def __init__(self):
         super().__init__()
-
-    def _validate(self) -> None:
-        pass

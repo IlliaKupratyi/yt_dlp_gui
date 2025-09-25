@@ -1,4 +1,4 @@
-from src.core.flags.base import BaseFlag
+from src.core.flags.base_flag import BaseFlag
 
 
 class WriteThumbnailFlag(BaseFlag):
@@ -6,9 +6,3 @@ class WriteThumbnailFlag(BaseFlag):
 
     def __init__(self):
         super().__init__()
-
-    def _validate(self) -> None:
-        pass
-
-    def to_string(self) -> list[str]:
-        return ["--" + self.name]
