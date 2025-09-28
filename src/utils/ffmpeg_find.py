@@ -1,4 +1,4 @@
-import imageio_ffmpeg
+import imageio_ffmpeg # type: ignore
 
 from src.utils.path_validator import validate_absolute_path
 

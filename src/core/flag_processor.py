@@ -11,7 +11,7 @@ class FlagProcessor:
         self.flags: list[BaseFlag] = []
 
     """
-    Add a flag to the processor, with automatic resolution of dependencies and conflicts.
+    Add a flag to the processor, with resolution of dependencies and conflicts.
     """
     def add_flag(self, flag : BaseFlag):
         if flag in self.flags:
@@ -21,11 +21,18 @@ class FlagProcessor:
             if any(isinstance(existing, conflict_class) for existing in self.flags):
                 return
 
-        for required_class in flag.requires:
-            if not any(isinstance(existing, required_class) for existing in self.flags):
-                self.flags.append(required_class())
+        self._add_required_flags(flag)
 
         self.flags.append(flag)
+
+    def remove_flag(self, flag : BaseFlag):
+        self.flags.remove(flag)
+
+        for required_flag in flag.requires:
+            if required_flag() in self.flags:
+                self.flags.remove(required_flag())
+
+        self._add_required_flags(flag)
 
     """
     Return all flags, ensuring that all REQUIRED_FLAGS are included.
@@ -36,3 +43,11 @@ class FlagProcessor:
                 self.flags.append(required_class())
 
         return self.flags
+
+    def clear_flags(self):
+        self.flags = []
+
+    def _add_required_flags(self, flag: BaseFlag):
+        for required_class in flag.requires:
+            if not any(isinstance(existing, required_class) for existing in self.flags):
+                self.flags.append(required_class())

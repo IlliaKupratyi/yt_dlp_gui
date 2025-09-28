@@ -8,13 +8,6 @@ from src.core.flags.base_flag import BaseFlag
 Manages execution of yt-dlp via subprocess
 """
 class YTDLPRunner:
-
-    """
-    Initialize the runner with an optional custom path to yt-dlp executable.
-
-    If no path is provided, uses the default from Config.YT_DLP_PATH,
-    which automatically selects 'yt-dlp.exe' on Windows or 'yt-dlp' on Unix-like systems.
-    """
     def __init__(self, yt_dlp_path: str | None = None):
         self.yt_dlp_path: str = yt_dlp_path or YT_DLP_PATH
         self.flags: list[BaseFlag] = []
