@@ -1,6 +1,9 @@
+import platform
+
+from src.app import App
 from src.core.controller.app_controller import AppController
-from src.core.flag_processor import FlagProcessor
 from src.core.config.config import DATA_DIR
+import customtkinter as ctk
 
 from src.core.flags.convert_thumbnails_flag import ConvertThumbnailsFlag
 from src.core.flags.embed_thumbnail_flag import EmbedThumbnailFlag
@@ -14,6 +17,7 @@ from src.core.flags.write_link_flag import WriteLinkFlag
 from src.core.flags.write_subs_flag import WriteSubsFlag
 from src.core.flags.write_thumbnail_flag import WriteThumbnailFlag
 from src.utils.ffmpeg_find import find_ffmpeg_path
+from src.view.main_window import MainWindow
 
 
 def main():
@@ -36,7 +40,12 @@ def main():
     def print_line(line):
         print(f"{line}")
 
-    app_controller.start_downloading(print_line)
+    app_controller.start_downloading(on_output=print_line)
+
+def run_main_window():
+    app = App()
+    app.run()
+
 
 if __name__ == '__main__':
-    main()
+    run_main_window()
