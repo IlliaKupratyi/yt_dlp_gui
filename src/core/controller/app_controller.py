@@ -1,3 +1,4 @@
+import threading
 from typing import Optional, Callable
 
 from src.core.dataclass.subtitle import Subtitles
@@ -17,6 +18,8 @@ class AppController:
         self.url: str = ""
         self.subtitles: Optional[Subtitles] = None
         self.formats: list[dict[str, str]] = []
+        self.is_running: bool = False
+        self.download_thread: Optional[threading.Thread] = None
 
     def setup_video_properties(self, url: str):
         if not url:
@@ -31,10 +34,7 @@ class AppController:
             output_lines.append(line)
 
         propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag()])
-        result = propertiesRunner.run(url, on_output=collect_line)
-
-        if result['return_code'] != 0:
-            raise RuntimeError(f"yt-dlp failed: {' '.join(result['stderr'])}")
+        propertiesRunner.run(url, on_output=collect_line)
 
         self.subtitles = subtitles_parse_output(output_lines)
         self.formats = formats_parse_output(output_lines)
@@ -57,7 +57,26 @@ class AppController:
     def get_flags(self):
         return self.flag_processor.get_flags()
 
-    def start_downloading(self, on_output: Optional[Callable[[str], None]] = None) -> dict[str, str]:
+    def start_downloading(self,
+                          on_output: Optional[Callable[[str], None]] = None,
+                          on_complete: Optional[Callable[[dict], None]] = None):
         self.runner.add_flag(self.get_flags())
-        result = self.runner.run(url=self.url, on_output=on_output)
-        return result
+
+        if self.is_running:
+            return
+
+        def download_task():
+            result = None
+            try:
+                result = self.runner.run(url=self.url, on_output=on_output)
+            except Exception as e:
+                result = {"return_code": -1, "error": str(e)}
+            finally:
+                self.is_running = False
+                if result:
+                    on_complete(result)
+
+
+
+        self.download_thread = threading.Thread(target=download_task, daemon=True)
+        self.download_thread.start()
