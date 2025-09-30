@@ -2,9 +2,11 @@ import threading
 
 import customtkinter as ctk
 
+from src.core.config.config import DATA_DIR
 from src.core.controller.app_controller import AppController
 from src.view.components.download_setting_panel import DownloadSettingsPanel
 from src.view.components.progress_bar import ProgressBar
+from src.view.components.output_folder_selector import OutputFolderSelector
 from src.view.components.url_input import URLInput
 from src.view.components.video_info_panel import VideoInfoPanel
 
@@ -16,12 +18,21 @@ class MainWindow:
 
         self.url_input = URLInput(root, self.on_url_enter)
         self.video_info = VideoInfoPanel(root)
+        self.output_selector = OutputFolderSelector(
+            root,
+            label_text="Save to:",
+            default_path=DATA_DIR,
+            on_change=self._on_output_folder_change
+        )
+        self.output_folder = DATA_DIR
+
         self.download_settings = DownloadSettingsPanel(root)
         self.progress_bar = ProgressBar(root)
 
     def setup(self):
         self.url_input.pack(pady=(20, 10))
         self.video_info.pack(pady=(10, 15), padx=20, fill="x")
+        self.output_selector.pack(pady=(0, 15), padx=20, fill="x")
         self.progress_bar.pack(pady=(0, 15))
 
     def on_url_enter(self, url: str):
@@ -63,3 +74,6 @@ class MainWindow:
             self.controller.get_formats(),
             self.controller.get_subtitles()
         )
+
+    def _on_output_folder_change(self, folder: str):
+        self.output_folder = folder
