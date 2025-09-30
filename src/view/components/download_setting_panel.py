@@ -4,6 +4,7 @@ from typing import List, Dict, Optional
 from src.core.config.config import AVAILABLE_PRESETS, AVAILABLE_THUMBNAILS_FORMATS
 from src.core.dataclass.subtitle import Subtitles
 from src.core.flags.base_flag import BaseFlag
+from src.core.flags.format_flag import FormatFlag
 from src.core.flags.preset_alias_flag import PresetAliasFlag
 from src.core.flags.write_subs_flag import WriteSubsFlag
 from src.core.flags.sub_langs_flag import SubLangsFlag
@@ -15,9 +16,8 @@ from src.view.components.scrollable_option_menu import ScrollableOptionMenu
 
 
 class DownloadSettingsPanel(ctk.CTkFrame):
-    def __init__(self, parent: ctk.CTk, controller):
+    def __init__(self, parent: ctk.CTk):
         super().__init__(parent)
-        self.controller = controller
         self.parent = parent
         self.formats: List[Dict[str, str]] = []
         self.subtitles: Optional[Subtitles] = None
@@ -189,33 +189,15 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         else:
             self.thumb_format_dropdown.configure(state="disabled")
 
-    def get_flags(self) -> List[BaseFlag]:
-        flags = []
+    def get_flags(self) -> list[BaseFlag]:
+        flags:list[BaseFlag] = [self._get_format_flag()]
 
-        # format
-        if self.use_preset_var.get():
-            preset_name = self.preset_dropdown.get()
-            if preset_name in self.presets:
-                flags.append(PresetAliasFlag(self.presets[preset_name]))
-        else:
-            selected = self.format_dropdown.get()
-            if "(" in selected and ")" in selected:
-                fmt_id = selected.split(" (")[0]
-                flags.append(PresetAliasFlag(fmt_id))
-            else:
-                flags.append(PresetAliasFlag(selected))
-
-        # Subtitles
-        if self.write_subs_var.get():
-            flags.append(WriteSubsFlag())
-            selected_langs = [lang for lang, var in self.lang_checkboxes.items() if var.get()]
-            if selected_langs:
-                flags.append(SubLangsFlag(selected_langs))
+        flags.extend(self._get_subs_flag())
 
         # Thumbnails
         if self.write_thumb_var.get():
             flags.append(WriteThumbnailFlag())
-            flags.append(PresetAliasFlag(f"ext={self.thumb_format_var.get()}"))
+            flags.append(PresetAliasFlag(self.thumb_format_var.get()))
 
         # Embed thumbnail
         if self.embed_thumb_var.get():
@@ -224,5 +206,21 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         # Save link
         if self.write_link_var.get():
             flags.append(WriteLinkFlag())
+
+        return flags
+
+    def _get_format_flag(self) -> BaseFlag:
+        if self.use_preset_var.get():
+            return PresetAliasFlag(self.preset_dropdown.get())
+        else:
+            return FormatFlag(self.format_dropdown.get())
+
+    def _get_subs_flag(self) -> list[BaseFlag]:
+        flags:list[BaseFlag] = []
+        if self.write_subs_var.get():
+            flags.append(WriteSubsFlag())
+            selected_langs = [lang for lang, var in self.lang_checkboxes.items() if var.get()]
+            if selected_langs:
+                flags.append(SubLangsFlag(selected_langs))
 
         return flags

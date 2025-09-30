@@ -16,7 +16,7 @@ class MainWindow:
 
         self.url_input = URLInput(root, self.on_url_enter)
         self.video_info = VideoInfoPanel(root)
-        self.download_settings = DownloadSettingsPanel(root, controller)
+        self.download_settings = DownloadSettingsPanel(root)
         self.progress_bar = ProgressBar(root)
 
     def setup(self):
