@@ -10,6 +10,8 @@ from src.core.flags.sub_langs_flag import SubLangsFlag
 from src.core.flags.write_thumbnail_flag import WriteThumbnailFlag
 from src.core.flags.embed_thumbnail_flag import EmbedThumbnailFlag
 from src.core.flags.write_link_flag import WriteLinkFlag
+from src.utils.format_lister import presets_to_dict, formats_to_dict
+from src.view.components.scrollable_option_menu import ScrollableOptionMenu
 
 
 class DownloadSettingsPanel(ctk.CTkFrame):
@@ -34,7 +36,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         ctk.CTkLabel(self.format_frame, text="Format:", font=("Arial", 12)).grid(
                     row=0, column=0, columnspan=2, sticky="w", padx=10, pady=(5, 10))
 
-        self.presets = AVAILABLE_PRESETS
+        self.presets = presets_to_dict(AVAILABLE_PRESETS)
 
         self.use_preset_var = ctk.BooleanVar(value=True)
         self.preset_radio = ctk.CTkRadioButton(
@@ -57,19 +59,19 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         )
         self.format_radio.grid(row=2, column=0, sticky="w", padx=10, pady=(5, 10))
 
-        self.preset_dropdown = ctk.CTkOptionMenu(
+        self.preset_dropdown = ScrollableOptionMenu(
             self.format_frame,
             values=list(self.presets),
-            command=self._on_preset_select,
             width=250
         )
         self.preset_dropdown.grid(row=1, column=1, sticky="w", padx=10, pady=(5, 10))
 
-        self.format_dropdown = ctk.CTkOptionMenu(
+        self.format_dropdown = ScrollableOptionMenu(
             self.format_frame,
             width=250,
-            state="disabled"
+            values=[]
         )
+        self.format_dropdown.configure(state="disabled")
         self.format_dropdown.grid(row=2, column=1, sticky="w", padx=10, pady=(5, 10))
 
         # === 2. Subtitles ===
@@ -134,11 +136,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         self.formats = formats
         self.subtitles = subtitles
 
-        format_options = [f"{f['ext']} {f.get('resolution', '')}" for f in formats]
-        if not format_options:
-            format_options = ["No available formats"]
-        self.format_dropdown.configure(values=format_options)
-        self.format_dropdown.set(format_options[0] if format_options else "No formats")
+        self.format_dropdown.configure(values=formats_to_dict(formats))
 
         self._update_subtitles_langs()
 
@@ -178,10 +176,6 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         else:
             self.format_dropdown.configure(state="normal")
             self.preset_dropdown.configure(state="disabled")
-
-    def _on_preset_select(self, preset_name: str):
-        fmt = self.presets
-        self.format_dropdown.set(f"{preset_name} (custom: {fmt})")
 
     def _on_subs_toggle(self):
         if self.write_subs_var.get():

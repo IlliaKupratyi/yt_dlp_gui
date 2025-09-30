@@ -26,3 +26,17 @@ def formats_parse_output(output_formats: list[str]) -> list[dict[str, str]]:
             "format_note": " ".join(parts[7:]) if len(parts) > 7 else "",
         })
     return formats
+
+def presets_to_dict(presets: list[str]) -> list[dict[str, str]]:
+    result_dict: list[dict[str, str]] = []
+    for preset in presets:
+        result_dict.append({"id": preset.lower(), "value": preset})
+
+    return result_dict
+
+def formats_to_dict(formats: list[dict[str, str]]) -> list[dict[str, str]]:
+    result_dict: list[dict[str, str]] = []
+    for format_value in formats:
+        result_dict.append({"id": format_value["id"], "value": format_value["ext"]+format_value["resolution"]})
+
+    return result_dict
