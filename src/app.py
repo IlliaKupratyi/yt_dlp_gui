@@ -12,7 +12,7 @@ class App:
 
     def run(self):
         self.root.title("yt-dlp GUI")
-        self.root.minsize(900, 700)
+        self.root.minsize(1200, 700)
 
         self.main_window.setup()
         self.root.mainloop()

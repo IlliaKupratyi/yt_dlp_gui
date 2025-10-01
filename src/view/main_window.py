@@ -7,6 +7,7 @@ from src.core.controller.app_controller import AppController
 from src.core.flags.output_paths_flag import OutputPathsFlag
 from src.view.components.control_button import ControlButton
 from src.view.components.download_setting_panel import DownloadSettingsPanel
+from src.view.components.notification import ToastNotification
 from src.view.components.progress_bar import ProgressBar
 from src.view.components.output_folder_selector import OutputFolderSelector
 from src.view.components.url_input import URLInput
@@ -82,7 +83,7 @@ class MainWindow:
             self.root.after(0, lambda: self.progress_indicator.label.configure(text=f"Loading... {line}"))
 
         def on_complete(result: dict):
-            pass
+            self._finish_download()
 
         self.controller.start_downloading(
             on_output=on_output,
@@ -119,3 +120,8 @@ class MainWindow:
     def _finish_download(self):
         self.progress_indicator.hide()
         self.download_button.set_normal()
+        ToastNotification(
+            message="✅ Video downloaded successfully!",
+            duration=3000,
+            parent=self.root
+        )
