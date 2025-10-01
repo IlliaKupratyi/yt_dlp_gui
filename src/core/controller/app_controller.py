@@ -21,7 +21,7 @@ class AppController:
         self.is_running: bool = False
         self.download_thread: Optional[threading.Thread] = None
 
-    def setup_video_properties(self, url: str):
+    def setup_video_properties(self, url: str, on_output: Optional[Callable[[str], None]] = None):
         if not url:
             raise ValueError('Url cannot be empty')
         self.url = url
@@ -32,6 +32,8 @@ class AppController:
 
         def collect_line(line: str) -> None:
             output_lines.append(line)
+            if on_output:
+                on_output(line)
 
         propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag()])
         propertiesRunner.run(url, on_output=collect_line)
@@ -59,11 +61,11 @@ class AppController:
 
     def start_downloading(self,
                           on_output: Optional[Callable[[str], None]] = None,
-                          on_complete: Optional[Callable[[dict], None]] = None):
+                          on_complete: Optional[Callable[[dict], None]] = None) -> Optional[threading.Thread]:
         self.runner.add_flag(self.get_flags())
 
         if self.is_running:
-            return
+            return None
 
         def download_task():
             result = None
@@ -73,10 +75,11 @@ class AppController:
                 result = {"return_code": -1, "error": str(e)}
             finally:
                 self.is_running = False
-                if result:
+                if result and on_complete:
                     on_complete(result)
 
 
 
         self.download_thread = threading.Thread(target=download_task, daemon=True)
         self.download_thread.start()
+        return self.download_thread

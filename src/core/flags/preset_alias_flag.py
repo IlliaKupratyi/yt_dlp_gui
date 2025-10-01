@@ -17,6 +17,7 @@ class PresetAliasFlag(BaseFlag):
 
     def _validate(self) -> None:
         if not isinstance(self.value, str) or self.value not in self.presets:
+            print(self.value)
             raise FlagValidatorError("Invalid preset alias")
 
     def to_args(self) -> List[str]:

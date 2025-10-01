@@ -13,12 +13,12 @@ class ScrollableOptionMenu(ctk.CTkFrame):
         super().__init__(parent)
         self.values = values or []
         self.command = command
-        self.selected_value = None
+        self.selected_value:dict[str, str] = self.values[0] if len(self.values) > 0 else None
         self.is_active = False
 
         self.button = ctk.CTkButton(
             self,
-            text=self.selected_value or "Select...",
+            text= self.selected_value['value'] if self.selected_value else "Select...",
             width=width,
             height=height,
             command=self._on_click
@@ -73,7 +73,7 @@ class ScrollableOptionMenu(ctk.CTkFrame):
 
 
     def _select(self, value:dict[str, str]):
-        self.selected_format = value
+        self.selected_value = value
 
         display_text = value["value"]
         self.button.configure(text=display_text)
@@ -85,12 +85,12 @@ class ScrollableOptionMenu(ctk.CTkFrame):
     def configure(self, values:list[dict[str, str]]=None, state:str=None, **kwargs):
         if values is not None:
             self.values = values
-            self.selected_value = self.values[0]["value"] if self.values else ""
-            self.button.configure(text=self.selected_value or "Select...")
+            self.selected_value = self.values[0] if self.values else {'id': '', 'value': ''}
+            self.button.configure(text=self.selected_value['value'] or "Select...")
         if state == "disabled":
             self.button.configure(state="disabled")
         elif state == "normal":
             self.button.configure(state="normal")
 
     def get(self) -> str:
-        return self.selected_value
+        return self.selected_value['id']

@@ -4,6 +4,7 @@ from typing import List, Dict, Optional
 from src.core.config.config import AVAILABLE_PRESETS, AVAILABLE_THUMBNAILS_FORMATS
 from src.core.dataclass.subtitle import Subtitles
 from src.core.flags.base_flag import BaseFlag
+from src.core.flags.convert_thumbnails_flag import ConvertThumbnailsFlag
 from src.core.flags.format_flag import FormatFlag
 from src.core.flags.preset_alias_flag import PresetAliasFlag
 from src.core.flags.write_subs_flag import WriteSubsFlag
@@ -144,7 +145,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
 
     """Update checkboxes subtitles languages"""
     def _update_subtitles_langs(self):
-        for widget in self.lang_checkboxes.values():
+        for widget in self.lang_checkboxes:
             widget.destroy()
         self.lang_checkboxes.clear()
 
@@ -197,7 +198,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         # Thumbnails
         if self.write_thumb_var.get():
             flags.append(WriteThumbnailFlag())
-            flags.append(PresetAliasFlag(self.thumb_format_var.get()))
+            flags.append(ConvertThumbnailsFlag(self.thumb_format_var.get()))
 
         # Embed thumbnail
         if self.embed_thumb_var.get():

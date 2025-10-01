@@ -4,7 +4,7 @@ from view.main_window import MainWindow
 
 class App:
     def __init__(self):
-        ctk.set_appearance_mode("light")
+        ctk.set_appearance_mode("dark")
 
         self.root = ctk.CTk()
         self.controller = AppController()  # ← Ваш контроллер без изменений!
