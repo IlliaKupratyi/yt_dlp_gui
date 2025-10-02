@@ -22,22 +22,7 @@ class MainWindow:
         self.scrollable_frame = ctk.CTkScrollableFrame(root, width=width, fg_color="transparent")
         self.scrollable_frame.pack(fill="both", expand=True)
 
-        self.top_input = ctk.CTkFrame(self.scrollable_frame)
-        ctk.CTkLabel(self.top_input, text="Format:", font=("Arial", 12)).grid(
-            row=0, column=0, columnspan=2, sticky="w", padx=10, pady=(5, 10))
-
-        self.url_input = URLInput(self.top_input, self.on_url_enter)
-
-        self.download_button = ControlButton(
-            self.top_input,
-            text="Download Video",
-            command=self.on_download,
-            width=180,
-            height=30
-        )
-
-        self.url_input.grid(row=0, column=0, sticky="w", padx=10, pady=(5, 10))
-        self.download_button.grid(row=0, column=1, sticky="w", padx=10, pady=(5, 10))
+        self.url_input = URLInput(self.scrollable_frame, self.on_url_enter)
 
         self.video_info = VideoInfoPanel(self.scrollable_frame)
         self.output_selector = OutputFolderSelector(
@@ -50,10 +35,19 @@ class MainWindow:
         self.output_folder = DATA_DIR
 
         self.download_settings = DownloadSettingsPanel(self.scrollable_frame)
+
+        self.download_button = ControlButton(
+            self.scrollable_frame,
+            text="Download Video",
+            command=self.on_download,
+            width=180,
+            height=30
+        )
+
         self.progress_indicator = ProgressBar(self.scrollable_frame)
 
     def setup(self):
-        self.top_input.pack(pady=(20, 10))
+        self.url_input.pack(pady=(20, 10))
         self.video_info.pack(pady=(10, 15), padx=20, fill="x")
         self.output_selector.pack(pady=(0, 15), padx=20, fill="x")
 
@@ -113,6 +107,7 @@ class MainWindow:
         self._show_download_settings()
         self.download_button.set_normal()
         self.progress_indicator.hide()
+        self.download_button.pack()
 
     def _set_flags(self):
         self.controller.add_flag(OutputPathsFlag(self.output_folder))
