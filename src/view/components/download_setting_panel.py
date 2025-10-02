@@ -17,21 +17,18 @@ from src.view.components.scrollable_option_menu import ScrollableOptionMenu
 
 
 class DownloadSettingsPanel(ctk.CTkFrame):
-    def __init__(self, parent: ctk.CTk):
+    def __init__(self, parent):
         super().__init__(parent)
         self.parent = parent
         self.formats: List[Dict[str, str]] = []
         self.subtitles: Optional[Subtitles] = None
         self.is_initialized = False
 
-        self.scrollable = ctk.CTkScrollableFrame(self, width=600, height=400)
-        self.scrollable.pack(fill="both", expand=True, padx=10, pady=10)
-
-        self.title = ctk.CTkLabel(self.scrollable, text="Download settings", font=("Arial", 16, "bold"))
+        self.title = ctk.CTkLabel(self, text="Download settings", font=("Arial", 16, "bold"))
         self.title.pack(pady=(10, 15))
 
         # === 1. Formats ===
-        self.format_frame = ctk.CTkFrame(self.scrollable)
+        self.format_frame = ctk.CTkFrame(self)
         self.format_frame.pack(pady=5, padx=10, fill="x")
 
         ctk.CTkLabel(self.format_frame, text="Format:", font=("Arial", 12)).grid(
@@ -76,7 +73,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         self.format_dropdown.grid(row=2, column=1, sticky="w", padx=10, pady=(5, 10))
 
         # === 2. Subtitles ===
-        self.subtitles_frame = ctk.CTkFrame(self.scrollable)
+        self.subtitles_frame = ctk.CTkFrame(self)
         self.subtitles_frame.pack(pady=5, padx=10, fill="x")
 
         self.write_subs_var = ctk.BooleanVar(value=False)
@@ -93,7 +90,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         self.lang_checkboxes = {}
 
         # === 3. Thumbnails ===
-        self.thumbnail_frame = ctk.CTkFrame(self.scrollable)
+        self.thumbnail_frame = ctk.CTkFrame(self)
         self.thumbnail_frame.pack(pady=5, padx=10, fill="x")
 
         self.write_thumb_var = ctk.BooleanVar(value=False)
@@ -126,7 +123,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         # === 4. Save link ===
         self.write_link_var = ctk.BooleanVar(value=False)
         self.write_link_check = ctk.CTkCheckBox(
-            self.scrollable,
+            self,
             text="Save link to video",
             variable=self.write_link_var
         )
@@ -220,7 +217,11 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         flags:list[BaseFlag] = []
         if self.write_subs_var.get():
             flags.append(WriteSubsFlag())
-            selected_langs = [lang for lang, var in self.lang_checkboxes.items() if var.get()]
+            selected_langs = []
+            for lang, checkbox in self.lang_checkboxes.items():
+                var = checkbox.cget("variable")
+                if var.get():
+                    selected_langs.append(lang)
             if selected_langs:
                 flags.append(SubLangsFlag(selected_langs))
 

@@ -15,11 +15,14 @@ from src.view.components.video_info_panel import VideoInfoPanel
 
 
 class MainWindow:
-    def __init__(self, root: ctk.CTk, controller: AppController):
+    def __init__(self, root: ctk.CTk, controller: AppController, width: int = 800):
         self.root = root
         self.controller = controller
 
-        self.top_input = ctk.CTkFrame(root)
+        self.scrollable_frame = ctk.CTkScrollableFrame(root, width=width, fg_color="transparent")
+        self.scrollable_frame.pack(fill="both", expand=True)
+
+        self.top_input = ctk.CTkFrame(self.scrollable_frame)
         ctk.CTkLabel(self.top_input, text="Format:", font=("Arial", 12)).grid(
             row=0, column=0, columnspan=2, sticky="w", padx=10, pady=(5, 10))
 
@@ -36,9 +39,9 @@ class MainWindow:
         self.url_input.grid(row=0, column=0, sticky="w", padx=10, pady=(5, 10))
         self.download_button.grid(row=0, column=1, sticky="w", padx=10, pady=(5, 10))
 
-        self.video_info = VideoInfoPanel(root)
+        self.video_info = VideoInfoPanel(self.scrollable_frame)
         self.output_selector = OutputFolderSelector(
-            root,
+            self.scrollable_frame,
             label_text="Save to:",
             default_path=DATA_DIR,
             on_change=self._on_output_folder_change
@@ -46,8 +49,8 @@ class MainWindow:
 
         self.output_folder = DATA_DIR
 
-        self.download_settings = DownloadSettingsPanel(root)
-        self.progress_indicator = ProgressBar(root)
+        self.download_settings = DownloadSettingsPanel(self.scrollable_frame)
+        self.progress_indicator = ProgressBar(self.scrollable_frame)
 
     def setup(self):
         self.top_input.pack(pady=(20, 10))
