@@ -17,7 +17,7 @@ class OutputPathsFlag(BaseFlag):
         try:
             validate_absolute_path(self.value)
         except (ValueError, TypeError) as e:
-            raise FlagValidatorError(f"Invalid --paths value: {str(e)}") from e
+            raise FlagValidatorError("Error with " + self.name + "Invalid --paths value: " + str(e))
 
     def to_args(self) -> list[str]:
         return ["--" + self.name, self.value]

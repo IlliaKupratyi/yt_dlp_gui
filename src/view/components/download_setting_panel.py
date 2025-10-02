@@ -1,8 +1,11 @@
+import logging
+
 import customtkinter as ctk
 from typing import List, Dict, Optional
 
 from src.core.config.config import AVAILABLE_PRESETS, AVAILABLE_THUMBNAILS_FORMATS
 from src.core.dataclass.subtitle import Subtitles
+from src.core.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 from src.core.flags.convert_thumbnails_flag import ConvertThumbnailsFlag
 from src.core.flags.format_flag import FormatFlag
@@ -15,6 +18,7 @@ from src.core.flags.write_link_flag import WriteLinkFlag
 from src.utils.format_util import presets_to_dict, formats_to_dict, filter_by_unique_values
 from src.view.components.scrollable_option_menu import ScrollableOptionMenu
 
+logger = logging.getLogger("yt_dlp_gui")
 
 class DownloadSettingsPanel(ctk.CTkFrame):
     def __init__(self, parent):
@@ -129,6 +133,8 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         )
         self.write_link_check.pack(pady=(10, 20), padx=10, anchor="w")
 
+        logger.info("DownloadSettingsPanel initialized")
+
     """Update available formats and subtitles languages"""
     def update_video_info(self, formats: List[Dict[str, str]], subtitles: Subtitles):
         self.formats = formats
@@ -194,35 +200,57 @@ class DownloadSettingsPanel(ctk.CTkFrame):
 
         # Thumbnails
         if self.write_thumb_var.get():
-            flags.append(WriteThumbnailFlag())
-            flags.append(ConvertThumbnailsFlag(self.thumb_format_var.get()))
+            try:
+                flags.append(WriteThumbnailFlag())
+                flags.append(ConvertThumbnailsFlag(self.thumb_format_var.get()))
+            except FlagValidatorError:
+                logger.error("DownloadSettingsPanel. Thumbnails flag validation failed")
+
 
         # Embed thumbnail
         if self.embed_thumb_var.get():
-            flags.append(EmbedThumbnailFlag())
+            try:
+                flags.append(EmbedThumbnailFlag())
+            except FlagValidatorError:
+                logger.error("DownloadSettingsPanel. Embed thumbnail flag validation failed")
 
         # Save link
         if self.write_link_var.get():
-            flags.append(WriteLinkFlag())
+            try:
+                flags.append(WriteLinkFlag())
+            except FlagValidatorError:
+                logger.error("DownloadSettingsPanel. Link flag validation failed")
 
         return flags
 
-    def _get_format_flag(self) -> BaseFlag:
+    def _get_format_flag(self) -> BaseFlag | None:
         if self.use_preset_var.get():
-            return PresetAliasFlag(self.preset_dropdown.get())
+            try:
+                return PresetAliasFlag(self.preset_dropdown.get())
+            except FlagValidatorError:
+                logger.error("DownloadSettingsPanel. Preset alias flag validation failed")
         else:
-            return FormatFlag(self.format_dropdown.get())
+            try:
+                return FormatFlag(self.format_dropdown.get())
+            except FlagValidatorError:
+                logger.error("DownloadSettingsPanel. Format flag validation failed")
 
     def _get_subs_flag(self) -> list[BaseFlag]:
         flags:list[BaseFlag] = []
         if self.write_subs_var.get():
-            flags.append(WriteSubsFlag())
+            try:
+                flags.append(WriteSubsFlag())
+            except FlagValidatorError:
+                logger.error("DownloadSettingsPanel. WriteSubs flag validation failed")
             selected_langs = []
             for lang, checkbox in self.lang_checkboxes.items():
                 var = checkbox.cget("variable")
                 if var.get():
                     selected_langs.append(lang)
             if selected_langs:
-                flags.append(SubLangsFlag(selected_langs))
+                try:
+                    flags.append(SubLangsFlag(selected_langs))
+                except FlagValidatorError:
+                    logger.error("DownloadSettingsPanel. Selected languages flag validation failed")
 
         return flags

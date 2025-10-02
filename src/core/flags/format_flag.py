@@ -16,7 +16,7 @@ class FormatFlag(BaseFlag):
 
     def _validate(self) -> None:
         if not isinstance(self.value, str):
-            raise FlagValidatorError("Format value must be a string")
+            raise FlagValidatorError("Error with " + self.name + "Format value must be a string")
 
     def to_args(self) -> list[str]:
         return ["--" + self.name, self.value]

@@ -14,10 +14,13 @@ from src.core.flags.sub_langs_flag import SubLangsFlag
 from src.core.flags.write_link_flag import WriteLinkFlag
 from src.core.flags.write_subs_flag import WriteSubsFlag
 from src.core.flags.write_thumbnail_flag import WriteThumbnailFlag
+from src.core.logger import setup_logger
 from src.utils.ffmpeg_find import find_ffmpeg_path
 
+IS_DEV = True  # ← поменяйте на False в релизе
+logger = setup_logger(log_to_console=IS_DEV)
 
-def main():
+def run_manual_tests():
     app_controller = AppController()
     app_controller.setup_video_properties("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
 
@@ -41,10 +44,14 @@ def main():
     if thread:
         thread.join()
 
-def run_main_window():
-    app = App()
-    app.run()
+def main():
+    logger.info("Application started")
+    try:
+        app = App()
+        app.run()
+    except Exception as e:
+        logger.exception("Critical error in main loop: " + e.__str__())
 
 
 if __name__ == '__main__':
-    run_main_window()
+    run_manual_tests()

@@ -1,3 +1,4 @@
+import logging
 import threading
 
 import customtkinter as ctk
@@ -13,6 +14,7 @@ from src.view.components.output_folder_selector import OutputFolderSelector
 from src.view.components.url_input import URLInput
 from src.view.components.video_info_panel import VideoInfoPanel
 
+logger = logging.getLogger("yt_dlp_gui")
 
 class MainWindow:
     def __init__(self, root: ctk.CTk, controller: AppController, width: int = 800):
@@ -46,10 +48,13 @@ class MainWindow:
 
         self.progress_indicator = ProgressBar(self.scrollable_frame)
 
+        logger.info("MainWindow initialized")
+
     def setup(self):
         self.url_input.pack(pady=(20, 10))
         self.video_info.pack(pady=(10, 15), padx=20, fill="x")
         self.output_selector.pack(pady=(0, 15), padx=20, fill="x")
+        logger.info("MainWindow setup complete")
 
     def on_url_enter(self, url: str):
         self.progress_indicator.show_indeterminate("Fetching video info...")
@@ -63,12 +68,16 @@ class MainWindow:
                 self.video_info.update_info(self.controller.get_formats(), self.controller.get_subtitles())
                 self.download_button.set_normal()
                 if len(self.controller.get_formats()) == 0:
+                    # noinspection PyTypeChecker
                     self.root.after(0, self._on_video_info_error)
                 else:
                     # noinspection PyTypeChecker
                     self.root.after(0, self._on_video_info_loaded)
-            except Exception:
+            except Exception as e:
+                logger.error("MainWindow. Error with loading video info. " + str(e))
                 self._on_video_info_error()
+
+        logger.info("MainWindow. Fetching video info...")
         threading.Thread(target=load_task, daemon=True).start()
 
     def on_download(self):
@@ -83,8 +92,10 @@ class MainWindow:
             self.root.after(0, lambda: self.progress_indicator.label.configure(text=f"Loading... {line}"))
 
         def on_complete(result: dict):
+            logger.info("Video download complete. Result:\n" + str(result))
             self._finish_download()
 
+        logger.info("MainWindow. Downloading video...")
         self.controller.start_downloading(
             on_output=on_output,
             on_complete=on_complete
@@ -103,9 +114,11 @@ class MainWindow:
         )
 
     def _on_output_folder_change(self, folder: str):
+        logger.info("MainWindow. Output folder changed to " + folder)
         self.output_folder = folder
 
     def _on_video_info_loaded(self):
+        logger.info("MainWindow. On video info loaded.")
         self.video_info.update_info(self.controller.get_formats(), self.controller.get_subtitles())
         self.url_input.set_normal()
         self._show_download_settings()
@@ -114,6 +127,7 @@ class MainWindow:
         self.download_button.pack()
 
     def _on_video_info_error(self):
+        logger.info("MainWindow. On video info error")
         self.url_input.set_error()
         self.progress_indicator.hide()
         self.download_button.pack_forget()
@@ -126,6 +140,7 @@ class MainWindow:
             self.controller.add_flag(flag)
 
     def _finish_download(self):
+        logger.info("MainWindow. Finish downloading")
         self.progress_indicator.hide()
         self.download_button.set_normal()
         ToastNotification(

@@ -15,7 +15,7 @@ class SubLangsFlag(BaseFlag):
 
     def _validate(self) -> None:
         if not isinstance(self.value, str):
-            raise FlagValidatorError("Sub languages must be a string")
+            raise FlagValidatorError("Error with " + self.name + "Sub languages must be a string")
 
     def to_args(self) -> list[str]:
         return ["--" + self.name, self.value]

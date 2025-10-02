@@ -15,7 +15,7 @@ class FfmpegLocationFlag(BaseFlag):
         try:
             validate_absolute_path(self.value)
         except ValueError:
-            raise FlagValidatorError()
+            raise FlagValidatorError("Error with " + self.name + ". Invalid path.")
 
     def to_args(self) -> list[str]:
         return ["--" + self.name, self.value]

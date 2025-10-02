@@ -16,7 +16,7 @@ class ConvertThumbnailsFlag(BaseFlag):
 
     def _validate(self) -> None:
         if not isinstance(self.value, str) or self.value not in self.supported_formats:
-            raise FlagValidatorError("Not supported format for thumbnail conversion!")
+            raise FlagValidatorError("Error with " + self.name + "Not supported format for thumbnail conversion!")
 
     def to_args(self) -> list[str]:
         return ["--" + self.name, self.value]
