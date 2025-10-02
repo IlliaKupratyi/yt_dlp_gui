@@ -3,15 +3,15 @@ from typing import Optional, Callable
 import logging
 
 from src.core.dataclass.subtitle import Subtitles
-from src.core.exception import YTDLRuntimeError
-from src.core.flag_processor import FlagProcessor
+from src.core.exceptions.exception import YTDLRuntimeError
+from src.core.service.flag_processor import FlagProcessor
 from src.core.flags.base_flag import BaseFlag
 from src.core.flags.format_list_flag import FormatListFlag
 from src.core.flags.list_subs_flag import ListSubsFlag
-from src.core.runner import YTDLPRunner
-from src.utils.console_output_util import has_error
-from src.utils.format_util import formats_parse_output
-from src.utils.subtitles_lister import subtitles_parse_output
+from src.core.service.runner import YTDLPRunner
+from src.core.utils.console_output_util import has_error
+from src.core.utils.format_util import formats_parse_output
+from src.core.utils.subtitles_lister import subtitles_parse_output
 
 logger = logging.getLogger("yt_dlp_gui")
 

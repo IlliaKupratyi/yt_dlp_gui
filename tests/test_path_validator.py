@@ -1,6 +1,6 @@
 import sys
 
-from src.utils.path_validator import validate_absolute_path
+from src.core.utils.path_validator import validate_absolute_path
 
 def test_path_validator() -> None:
     if sys.platform == 'win32':

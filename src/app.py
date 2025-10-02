@@ -1,6 +1,6 @@
 import customtkinter as ctk
-from core.controller.app_controller import AppController
-from view.main_window import MainWindow
+from src.controller.app_controller import AppController
+from src.view.main_window import MainWindow
 
 class App:
     def __init__(self):

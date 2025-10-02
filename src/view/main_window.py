@@ -4,7 +4,7 @@ import threading
 import customtkinter as ctk
 
 from src.core.config.config import DATA_DIR
-from src.core.controller.app_controller import AppController
+from src.controller.app_controller import AppController
 from src.core.flags.output_paths_flag import OutputPathsFlag
 from src.view.components.control_button import ControlButton
 from src.view.components.download_setting_panel import DownloadSettingsPanel

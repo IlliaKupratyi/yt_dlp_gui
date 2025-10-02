@@ -1,6 +1,6 @@
 
 from src.app import App
-from src.core.controller.app_controller import AppController
+from src.controller.app_controller import AppController
 from src.core.config.config import DATA_DIR
 
 from src.core.flags.convert_thumbnails_flag import ConvertThumbnailsFlag
@@ -14,8 +14,8 @@ from src.core.flags.sub_langs_flag import SubLangsFlag
 from src.core.flags.write_link_flag import WriteLinkFlag
 from src.core.flags.write_subs_flag import WriteSubsFlag
 from src.core.flags.write_thumbnail_flag import WriteThumbnailFlag
-from src.core.logger import setup_logger
-from src.utils.ffmpeg_find import find_ffmpeg_path
+from src.core.logger.logger import setup_logger
+from src.core.utils.ffmpeg_find import find_ffmpeg_path
 
 IS_DEV = True  # ← поменяйте на False в релизе
 logger = setup_logger(log_to_console=IS_DEV)
@@ -54,4 +54,4 @@ def main():
 
 
 if __name__ == '__main__':
-    run_manual_tests()
+    main()

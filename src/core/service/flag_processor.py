@@ -1,5 +1,5 @@
 from src.core.config.flag_config import REQUIRED_FLAGS
-from src.core.exception import FlagValidatorError
+from src.core.exceptions.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 
 import logging

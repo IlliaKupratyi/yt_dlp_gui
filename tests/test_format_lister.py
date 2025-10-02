@@ -1,4 +1,4 @@
-from src.utils.format_util import formats_parse_output
+from src.core.utils import formats_parse_output
 
 
 def test_formats_parse_output_parses_valid_lines():

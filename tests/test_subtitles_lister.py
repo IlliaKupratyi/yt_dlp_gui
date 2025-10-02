@@ -1,4 +1,4 @@
-from src.utils.subtitles_lister import subtitles_parse_output
+from src.core.utils.subtitles_lister import subtitles_parse_output
 from src.core.dataclass.subtitle import Subtitles
 
 

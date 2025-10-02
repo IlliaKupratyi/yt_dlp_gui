@@ -1,4 +1,4 @@
-from src.core.exception import FlagValidatorError
+from src.core.exceptions.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 
 

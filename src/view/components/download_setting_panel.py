@@ -5,7 +5,7 @@ from typing import List, Dict, Optional
 
 from src.core.config.config import AVAILABLE_PRESETS, AVAILABLE_THUMBNAILS_FORMATS
 from src.core.dataclass.subtitle import Subtitles
-from src.core.exception import FlagValidatorError
+from src.core.exceptions.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 from src.core.flags.convert_thumbnails_flag import ConvertThumbnailsFlag
 from src.core.flags.format_flag import FormatFlag
@@ -15,7 +15,7 @@ from src.core.flags.sub_langs_flag import SubLangsFlag
 from src.core.flags.write_thumbnail_flag import WriteThumbnailFlag
 from src.core.flags.embed_thumbnail_flag import EmbedThumbnailFlag
 from src.core.flags.write_link_flag import WriteLinkFlag
-from src.utils.format_util import presets_to_dict, formats_to_dict, filter_by_unique_values
+from src.core.utils.format_util import presets_to_dict, formats_to_dict, filter_by_unique_values
 from src.view.components.scrollable_option_menu import ScrollableOptionMenu
 
 logger = logging.getLogger("yt_dlp_gui")

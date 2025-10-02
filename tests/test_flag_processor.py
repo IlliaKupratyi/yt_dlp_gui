@@ -1,5 +1,5 @@
 from src.core.flags.base_flag import BaseFlag
-from src.core.flag_processor import FlagProcessor
+from src.core.service.flag_processor import FlagProcessor
 
 """
 Mock flags for testing

@@ -1,7 +1,7 @@
 from abc import ABC
 from typing import Optional, Any
 
-from src.core.exception import FlagValidatorError
+from src.core.exceptions.exception import FlagValidatorError
 
 """
 An abstract base class for all flags
