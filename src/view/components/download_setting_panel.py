@@ -79,7 +79,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         self.subtitles_frame = ctk.CTkFrame(self.scrollable)
         self.subtitles_frame.pack(pady=5, padx=10, fill="x")
 
-        self.write_subs_var = ctk.BooleanVar(value=True)
+        self.write_subs_var = ctk.BooleanVar(value=False)
         self.write_subs_check = ctk.CTkCheckBox(
             self.subtitles_frame,
             text="Download subtitles",
@@ -96,7 +96,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         self.thumbnail_frame = ctk.CTkFrame(self.scrollable)
         self.thumbnail_frame.pack(pady=5, padx=10, fill="x")
 
-        self.write_thumb_var = ctk.BooleanVar(value=True)
+        self.write_thumb_var = ctk.BooleanVar(value=False)
         self.write_thumb_check = ctk.CTkCheckBox(
             self.thumbnail_frame,
             text="Download thumbnail",
@@ -115,7 +115,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         )
         self.thumb_format_dropdown.pack(anchor="w", padx=20, pady=(5, 10))
 
-        self.embed_thumb_var = ctk.BooleanVar(value=True)
+        self.embed_thumb_var = ctk.BooleanVar(value=False)
         self.embed_thumb_check = ctk.CTkCheckBox(
             self.thumbnail_frame,
             text="Embed thumbnail to video",
@@ -124,7 +124,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         self.embed_thumb_check.pack(anchor="w", padx=20, pady=(0, 10))
 
         # === 4. Save link ===
-        self.write_link_var = ctk.BooleanVar(value=True)
+        self.write_link_var = ctk.BooleanVar(value=False)
         self.write_link_check = ctk.CTkCheckBox(
             self.scrollable,
             text="Save link to video",
@@ -145,7 +145,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
 
     """Update checkboxes subtitles languages"""
     def _update_subtitles_langs(self):
-        for widget in self.lang_checkboxes:
+        for widget in self.lang_checkboxes.values():
             widget.destroy()
         self.lang_checkboxes.clear()
 
@@ -155,10 +155,10 @@ class DownloadSettingsPanel(ctk.CTkFrame):
                 all_langs.add(sub["Language"])
 
         for lang in sorted(all_langs):
-            var = ctk.BooleanVar(value=True)
+            var = ctk.BooleanVar(value=False)
             cb = ctk.CTkCheckBox(self.lang_frame, text=lang, variable=var)
             cb.pack(anchor="w", pady=1)
-            self.lang_checkboxes[lang] = var
+            self.lang_checkboxes[lang] = cb
 
         if len(self.lang_checkboxes) == 0:
             self.lang_frame.pack_forget()

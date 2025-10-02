@@ -54,9 +54,7 @@ class ScrollableOptionMenu(ctk.CTkFrame):
             btn = ctk.CTkButton(
                 scroll_frame,
                 text=display_text,
-                command=partial(self._select, fmt),
-                fg_color="transparent",
-                hover_color=("gray70", "gray30")
+                command=partial(self._select, fmt)
             )
             btn.pack(pady=2, padx=5, fill="x")
             btn.update_idletasks()

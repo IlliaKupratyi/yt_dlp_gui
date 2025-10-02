@@ -11,7 +11,7 @@ class ToastNotification:
     def __init__(
             self,
             message: str,
-            duration: int = 3000,  # milliseconds
+            duration: int = 3000,
             parent: Optional[ctk.CTk] = None,
             width: int = 300,
             height: int = 60
