@@ -8,7 +8,8 @@ from src.core.flags.base_flag import BaseFlag
 from src.core.flags.format_list_flag import FormatListFlag
 from src.core.flags.list_subs_flag import ListSubsFlag
 from src.core.runner import YTDLPRunner
-from src.utils.format_lister import formats_parse_output
+from src.utils.console_output_util import has_error
+from src.utils.format_util import formats_parse_output
 from src.utils.subtitles_lister import subtitles_parse_output
 
 
@@ -40,7 +41,7 @@ class AppController:
             propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag()])
             propertiesRunner.run(url, on_output=collect_line)
 
-            if self._has_error(output_lines):
+            if has_error(output_lines):
                 error_msg = next(
                     (line for line in output_lines if "ERROR:" in line),
                     "Unknown error occurred"
@@ -97,17 +98,3 @@ class AppController:
         self.download_thread = threading.Thread(target=download_task, daemon=True)
         self.download_thread.start()
         return self.download_thread
-
-    def _has_error(self, output_lines: list[str]) -> bool:
-        error_indicators = [
-            "ERROR:",
-            "Unable to extract",
-            "Incomplete YouTube ID",
-            "Invalid URL",
-            "Unsupported URL",
-            "Video unavailable"
-        ]
-        return any(
-            any(indicator in line for indicator in error_indicators)
-            for line in output_lines
-        )

@@ -4,7 +4,6 @@ import customtkinter as ctk
 
 from src.core.config.config import DATA_DIR
 from src.core.controller.app_controller import AppController
-from src.core.exception import YTDLRuntimeError
 from src.core.flags.output_paths_flag import OutputPathsFlag
 from src.view.components.control_button import ControlButton
 from src.view.components.download_setting_panel import DownloadSettingsPanel
@@ -63,12 +62,13 @@ class MainWindow:
                 self.controller.setup_video_properties(url=url.strip(), on_output=on_output)
                 self.video_info.update_info(self.controller.get_formats(), self.controller.get_subtitles())
                 self.download_button.set_normal()
-                # noinspection PyTypeChecker
-                self.root.after(0, self._on_video_info_loaded)
-            except YTDLRuntimeError as e:
+                if len(self.controller.get_formats()) == 0:
+                    self.root.after(0, self._on_video_info_error)
+                else:
+                    # noinspection PyTypeChecker
+                    self.root.after(0, self._on_video_info_loaded)
+            except Exception:
                 self._on_video_info_error()
-            except Exception as e:
-                print(e)
         threading.Thread(target=load_task, daemon=True).start()
 
     def on_download(self):
@@ -116,6 +116,8 @@ class MainWindow:
     def _on_video_info_error(self):
         self.url_input.set_error()
         self.progress_indicator.hide()
+        self.download_button.pack_forget()
+        self.download_settings.pack_forget()
 
     def _set_flags(self):
         self.controller.add_flag(OutputPathsFlag(self.output_folder))

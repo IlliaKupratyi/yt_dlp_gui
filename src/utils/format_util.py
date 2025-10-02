@@ -1,8 +1,3 @@
-
-"""
-Util for listing available formats via yt-dlp -F.
-"""
-
 """Parses a string returned by yt-dlp. Returns a dictionary."""
 def formats_parse_output(output_formats: list[str]) -> list[dict[str, str]]:
     formats: list[dict[str, str]] = []
