@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Change URLInput to check input on changes">
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Add error state to URLInput">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/controller/app_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/controller/app_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/exception.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/components/url_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/components/url_input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/main_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/format_lister.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/format_lister.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/components/download_setting_panel.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/components/download_setting_panel.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +41,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python tests.Python tests in test_zoom.py.executor": "Run",
     "Python tests.pytest in tests.executor": "Run",
-    "Python.main.executor": "Debug",
+    "Python.main.executor": "Run",
     "Python.main_window.executor": "Run",
     "Python.runner.executor": "Run",
     "Python.test_path_validator.executor": "Debug",
@@ -198,7 +196,7 @@
       <workItem from="1759254602915" duration="1668000" />
       <workItem from="1759312566573" duration="25000" />
       <workItem from="1759313863726" duration="7932000" />
-      <workItem from="1759398439973" duration="6250000" />
+      <workItem from="1759398439973" duration="7199000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -496,7 +494,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759403987369</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Add error state to URLInput">
+      <option name="closed" value="true" />
+      <created>1759405359226</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1759405359226</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -514,7 +520,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fit path_validator" />
     <MESSAGE value="subtitle_lister" />
     <MESSAGE value="WriteSubsFlag + SubLangsFlag" />
     <MESSAGE value="NoOverwritesFlag" />
@@ -539,7 +544,8 @@
     <MESSAGE value="Fix subtitles buttons" />
     <MESSAGE value="Add scrollable to MainWindow and remove from DownloadSettingsPanel" />
     <MESSAGE value="Change URLInput to check input on changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change URLInput to check input on changes" />
+    <MESSAGE value="Add error state to URLInput" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add error state to URLInput" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -554,6 +560,16 @@
           <line>21</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/core/controller/app_controller.py</url>
+          <line>49</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/view/components/scrollable_option_menu.py</url>
+          <line>84</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -563,6 +579,6 @@
     <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1759180152114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$.coverage" NAME=" Coverage Results" MODIFIED="1759076010583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$runner.coverage" NAME="runner Coverage Results" MODIFIED="1758634057776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/core" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1759405194372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1759406150573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

@@ -12,7 +12,7 @@ from src.core.flags.sub_langs_flag import SubLangsFlag
 from src.core.flags.write_thumbnail_flag import WriteThumbnailFlag
 from src.core.flags.embed_thumbnail_flag import EmbedThumbnailFlag
 from src.core.flags.write_link_flag import WriteLinkFlag
-from src.utils.format_lister import presets_to_dict, formats_to_dict
+from src.utils.format_lister import presets_to_dict, formats_to_dict, filter_by_unique_values
 from src.view.components.scrollable_option_menu import ScrollableOptionMenu
 
 
@@ -134,7 +134,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         self.formats = formats
         self.subtitles = subtitles
 
-        self.format_dropdown.configure(values=formats_to_dict(formats))
+        self.format_dropdown.configure(values=filter_by_unique_values(formats_to_dict(formats)))
 
         self._update_subtitles_langs()
 

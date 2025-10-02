@@ -37,6 +37,16 @@ def presets_to_dict(presets: list[str]) -> list[dict[str, str]]:
 def formats_to_dict(formats: list[dict[str, str]]) -> list[dict[str, str]]:
     result_dict: list[dict[str, str]] = []
     for format_value in formats:
-        result_dict.append({"id": format_value["id"], "value": format_value["ext"]+format_value["resolution"]})
+        result_dict.append({"id": format_value["id"], "value": format_value["ext"] + " " + format_value["resolution"]})
 
     return result_dict
+
+def filter_by_unique_values(items: list[dict[str, str]]) -> list[dict[str, str]]:
+        seen_values = set()
+        unique_items = []
+        for item in items:
+            value = item.get("value")
+            if value not in seen_values:
+                seen_values.add(value)
+                unique_items.append(item)
+        return unique_items
