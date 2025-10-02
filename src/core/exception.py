@@ -6,3 +6,7 @@ class YTDLRuntimeException(Exception):
 """Flag validation error"""
 class FlagValidatorError(Exception):
     pass
+
+"""Yt-dlp error"""
+class YTDLRuntimeError(Exception):
+    pass

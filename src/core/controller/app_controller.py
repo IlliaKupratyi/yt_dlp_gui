@@ -2,6 +2,7 @@ import threading
 from typing import Optional, Callable
 
 from src.core.dataclass.subtitle import Subtitles
+from src.core.exception import YTDLRuntimeError
 from src.core.flag_processor import FlagProcessor
 from src.core.flags.base_flag import BaseFlag
 from src.core.flags.format_list_flag import FormatListFlag
@@ -35,11 +36,24 @@ class AppController:
             if on_output:
                 on_output(line)
 
-        propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag()])
-        propertiesRunner.run(url, on_output=collect_line)
+        try:
+            propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag()])
+            propertiesRunner.run(url, on_output=collect_line)
 
-        self.subtitles = subtitles_parse_output(output_lines)
-        self.formats = formats_parse_output(output_lines)
+            if self._has_error(output_lines):
+                error_msg = next(
+                    (line for line in output_lines if "ERROR:" in line),
+                    "Unknown error occurred"
+                )
+                raise RuntimeError(f"yt-dlp error: {error_msg}")
+
+            self.subtitles = subtitles_parse_output(output_lines)
+            self.formats = formats_parse_output(output_lines)
+
+        except Exception as e:
+            self.subtitles = None
+            self.formats = []
+            raise YTDLRuntimeError(e)
 
     def get_subtitles(self) -> Subtitles:
         return self.subtitles
@@ -83,3 +97,17 @@ class AppController:
         self.download_thread = threading.Thread(target=download_task, daemon=True)
         self.download_thread.start()
         return self.download_thread
+
+    def _has_error(self, output_lines: list[str]) -> bool:
+        error_indicators = [
+            "ERROR:",
+            "Unable to extract",
+            "Incomplete YouTube ID",
+            "Invalid URL",
+            "Unsupported URL",
+            "Video unavailable"
+        ]
+        return any(
+            any(indicator in line for indicator in error_indicators)
+            for line in output_lines
+        )
