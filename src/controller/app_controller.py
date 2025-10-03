@@ -4,6 +4,7 @@ import logging
 
 from src.core.dataclass.subtitle import Subtitles
 from src.core.exceptions.exception import YTDLRuntimeError
+from src.core.flags.print_flag import PrintFlag
 from src.core.service.flag_processor import FlagProcessor
 from src.core.flags.base_flag import BaseFlag
 from src.core.flags.format_list_flag import FormatListFlag
@@ -22,6 +23,7 @@ class AppController:
         self.url: str = ""
         self.subtitles: Optional[Subtitles] = None
         self.formats: list[dict[str, str]] = []
+        self.title: str = ""
         self.is_running: bool = False
         self.download_thread: Optional[threading.Thread] = None
         logger.info("AppController initialized")
@@ -45,7 +47,7 @@ class AppController:
         logger.info("AppController. Start getting video properties.")
 
         try:
-            propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag()])
+            propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag(), PrintFlag("title")])
             propertiesRunner.run(url, on_output=collect_line)
 
             if has_error(output_lines):
@@ -58,6 +60,9 @@ class AppController:
 
             self.subtitles = subtitles_parse_output(output_lines)
             self.formats = formats_parse_output(output_lines)
+            self.title = output_lines[-1]
+
+            output_lines: list[str] = []
 
         except Exception as e:
             logger.error("AppController error. When setup video properties, subprocess error: " + str(e))
@@ -70,6 +75,9 @@ class AppController:
 
     def get_formats(self) -> list[dict[str, str]]:
         return self.formats
+
+    def get_title(self) -> str:
+        return self.title
 
     def add_flag(self, flag: BaseFlag):
         self.flag_processor.add_flag(flag)

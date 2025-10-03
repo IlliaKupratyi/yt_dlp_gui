@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Remove element Video Info">
-      <change afterPath="$PROJECT_DIR$/src/core/utils/link_parser.py" afterDir="false" />
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Add link parser">
+      <change afterPath="$PROJECT_DIR$/src/core/flags/print_flag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/components/video_info_panel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/components/url_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/components/url_input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/app_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/app_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/config/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/config/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/config/flag_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/config/flag_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/flags/preset_alias_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/preset_alias_flag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/service/runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/service/runner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/utils/link_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/link_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/components/download_setting_panel.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/components/download_setting_panel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/components/notification.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/components/notification.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/main_window.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +210,8 @@
       <workItem from="1759417676839" duration="934000" />
       <workItem from="1759430317127" duration="2988000" />
       <workItem from="1759441310046" duration="596000" />
-      <workItem from="1759481946807" duration="2261000" />
+      <workItem from="1759481946807" duration="2962000" />
+      <workItem from="1759485105239" duration="2935000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -556,7 +565,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759482852161</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Add link parser">
+      <option name="closed" value="true" />
+      <created>1759484235377</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1759484235377</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -574,7 +591,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="EmbedThumbnailFlag" />
     <MESSAGE value="FlagProcessor" />
     <MESSAGE value="TestFlagProcessor" />
     <MESSAGE value="AppController" />
@@ -599,7 +615,8 @@
     <MESSAGE value="Package refactor" />
     <MESSAGE value="Add no_overwrite_files and ignore_errors to download settings panel" />
     <MESSAGE value="Remove element Video Info" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove element Video Info" />
+    <MESSAGE value="Add link parser" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add link parser" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

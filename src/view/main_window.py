@@ -12,6 +12,7 @@ from src.view.components.notification import ToastNotification
 from src.view.components.progress_bar import ProgressBar
 from src.view.components.output_folder_selector import OutputFolderSelector
 from src.view.components.url_input import URLInput
+from src.view.components.video_info_panel import VideoInfoPanel
 
 logger = logging.getLogger("yt_dlp_gui")
 
@@ -33,6 +34,8 @@ class MainWindow:
         )
 
         self.output_folder = DATA_DIR
+
+        self.video_info_panel = VideoInfoPanel(self.scrollable_frame)
 
         self.download_settings = DownloadSettingsPanel(self.scrollable_frame)
 
@@ -99,6 +102,8 @@ class MainWindow:
 
     def _show_download_settings(self):
         self.progress_indicator.pack_forget()
+        self.video_info_panel.set_title(self.controller.get_title())
+        self.video_info_panel.pack(pady=(0, 15), padx=20, fill="x")
 
         self.download_settings.pack(pady=(0, 15), padx=20, fill="x")
 

@@ -1,5 +1,6 @@
 from typing import List
 
+from src.core.config.flag_config import AVAILABLE_PRESETS
 from src.core.exceptions.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 
@@ -7,7 +8,6 @@ from src.core.flags.base_flag import BaseFlag
 class PresetAliasFlag(BaseFlag):
     name = "preset-alias"
     short_name = "t"
-    presets = ["mp3", "aac", "mp4", "mkv"]
 
     def __init__(self, value: str = "mp4"):
         super().__init__(value)
@@ -16,7 +16,7 @@ class PresetAliasFlag(BaseFlag):
         self.conflicts = [FormatFlag]
 
     def _validate(self) -> None:
-        if not isinstance(self.value, str) or self.value not in self.presets:
+        if not isinstance(self.value, str) or self.value.upper() not in AVAILABLE_PRESETS:
             raise FlagValidatorError("Error with " + self.name + "Invalid preset alias")
 
     def to_args(self) -> List[str]:

@@ -4,8 +4,6 @@ from urllib.parse import urlparse
 """
 Validates and cleans a YouTube URL.
 """
-
-
 def validate_youtube_url(url: str) -> str | None:
     if not url or not isinstance(url, str):
         return None

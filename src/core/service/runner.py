@@ -80,3 +80,6 @@ class YTDLPRunner:
             "stdout": stdout_lines,
             "cmd": cmd,
         }
+
+    def clear_flags(self):
+        self.flags = []

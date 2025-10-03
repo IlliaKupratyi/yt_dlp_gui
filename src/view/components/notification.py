@@ -39,6 +39,7 @@ class ToastNotification:
         self._position_window(width, height, parent)
 
         # Auto-hide after delay
+        # noinspection PyTypeChecker
         self.window.after(duration, self.hide)
 
     """Position window in bottom-right corner of parent or screen."""
