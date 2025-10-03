@@ -6,8 +6,6 @@ A temporary popup notification that auto-hides after a delay.
 Appears in the bottom-right corner of the screen by default.
 """
 class ToastNotification:
-
-
     def __init__(
             self,
             message: str,

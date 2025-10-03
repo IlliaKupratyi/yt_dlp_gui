@@ -2,6 +2,7 @@ from typing import Optional, Callable, Any
 
 import customtkinter as ctk
 
+"""Button with states: normal, waiting, loading"""
 class ControlButton(ctk.CTkButton):
     def __init__(self,
                  parent: Any,
@@ -54,5 +55,6 @@ class ControlButton(ctk.CTkButton):
         )
         self._state = "waiting"
 
+    """Execute original command and switch to loading state."""
     def get_state(self) -> str:
         return self._state

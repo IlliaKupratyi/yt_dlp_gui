@@ -3,7 +3,7 @@ import customtkinter as ctk
 
 from src.core.utils.link_parser import validate_youtube_url
 
-
+"""Input field for YouTube URLs with real-time validation."""
 class URLInput(ctk.CTkFrame):
     def __init__(self, parent: Any, on_enter: Callable[[str], None]):
         super().__init__(parent)
@@ -12,6 +12,7 @@ class URLInput(ctk.CTkFrame):
         self.label = ctk.CTkLabel(self, text="YouTube URL:", font=("Arial", 14))
 
         self.url_var = ctk.StringVar()
+        # noinspection PyTypeChecker
         self.url_var.trace_add("write", self._on_url_change)
 
         self.entry = ctk.CTkEntry(
@@ -29,7 +30,8 @@ class URLInput(ctk.CTkFrame):
         self.entry.pack(side="left", padx=10, fill="x", expand=True)
         self.url_state="normal"
 
-    def _on_url_change(self, *args: tuple[Any, ...]) -> None:
+    """Validate URL on every change and trigger callback if valid and new."""
+    def _on_url_change(self) -> None:
         current_url = self.url_var.get().strip()
 
         validated_url = validate_youtube_url(current_url)
@@ -43,15 +45,18 @@ class URLInput(ctk.CTkFrame):
             self._last_processed_url = validated_url
             self.on_enter(validated_url)
 
+    """Return current URL as stripped string."""
     def get_url(self) -> str:
         value = self.url_var.get()
         return cast(str, value).strip()
 
+    """Show error message if not already in error state."""
     def set_error(self) -> None:
         if not self.url_state.__eq__("error"):
             self.label_error.pack(pady=10)
             self.url_state="error"
 
+    """Hide error message if currently showing."""
     def set_normal(self) -> None:
         if self.url_state.__eq__("error"):
             self.label_error.pack_forget()

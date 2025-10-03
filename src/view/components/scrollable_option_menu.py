@@ -3,7 +3,7 @@ from typing import Optional, Callable, Any
 
 import customtkinter as ctk
 
-
+"""Scrollable dropdown menu with custom items."""
 class ScrollableOptionMenu(ctk.CTkFrame):
     def __init__(self,
                  parent: Any, values:list[dict[str, str]],
@@ -16,6 +16,7 @@ class ScrollableOptionMenu(ctk.CTkFrame):
         self.selected_value:dict[str, str] = self.values[0] if len(self.values) > 0 else {}
         self.is_active = False
 
+        # Main button to toggle the menu
         self.button = ctk.CTkButton(
             self,
             text= self.selected_value['value'] if self.selected_value else "Select...",
@@ -26,6 +27,7 @@ class ScrollableOptionMenu(ctk.CTkFrame):
         self.button.pack()
         self.menu_window = None
 
+    """Toggle menu visibility."""
     def _on_click(self) -> None:
         if not self.is_active:
             self.is_active = True
@@ -35,20 +37,34 @@ class ScrollableOptionMenu(ctk.CTkFrame):
             if self.menu_window:
                 self.menu_window.destroy()
 
-
+    """Create and show the dropdown menu."""
     def _open_menu(self) -> None:
         if self.menu_window and self.menu_window.winfo_exists():
             self.menu_window.destroy()
-            self.menu_window = ctk.CTkToplevel(self)
-            self.menu_window.wm_overrideredirect(True)
-            self.menu_window.wm_geometry(f"+{self.winfo_rootx()}+{self.winfo_rooty() + 30}")
-            self.menu_window.wm_attributes("-topmost", True)
 
+        # Create toplevel window safely
+        try:
+            root = self.winfo_toplevel()
+            if root and root.winfo_exists():
+                self.menu_window = ctk.CTkToplevel(root)
+            else:
+                self.menu_window = ctk.CTkToplevel()
+        except Exception:
+            self.menu_window = ctk.CTkToplevel()
+
+        if self.menu_window is None:
+            raise RuntimeError("Failed to create CTkToplevel window")
+
+        # Configure window as popup
+        self.menu_window.wm_overrideredirect(True)
+        self.menu_window.wm_geometry(f"+{self.winfo_rootx()}+{self.winfo_rooty() + 30}")
+        self.menu_window.wm_attributes("-topmost", True)
+
+        # Add scrollable frame with buttons
         scroll_frame = ctk.CTkScrollableFrame(self.menu_window, width=250)
         scroll_frame.pack()
 
         btn_height = 30
-
         for fmt in self.values:
             display_text = fmt["value"]
 
@@ -61,17 +77,15 @@ class ScrollableOptionMenu(ctk.CTkFrame):
             btn.update_idletasks()
             btn_height = btn.winfo_height()
 
+        # Adjust window height based on content
         height = 200
-
         if len(self.values) * btn_height < 200:
             height = len(self.values) * btn_height
-
         if self.menu_window:
             self.menu_window.geometry(f"{250}x{height}")
-
         scroll_frame.configure(height=height)
 
-
+    """Handle item selection."""
     def _select(self, value:dict[str, str]) -> None:
         self.selected_value = value
 
@@ -84,6 +98,9 @@ class ScrollableOptionMenu(ctk.CTkFrame):
         if self.menu_window:
             self.menu_window.destroy()
 
+        self.is_active = False
+
+    """Update menu items or button state."""
     def configure(self, values:Optional[list[dict[str, str]]] = None, state:str="", **kwargs: dict[str, Any]) -> None:
         if values:
             self.values = values
@@ -94,5 +111,6 @@ class ScrollableOptionMenu(ctk.CTkFrame):
         elif state == "normal":
             self.button.configure(state="normal")
 
+    """Return ID of selected item."""
     def get(self) -> str:
         return self.selected_value['id']
