@@ -1,6 +1,8 @@
 from typing import Callable
 import customtkinter as ctk
 
+from src.core.utils.link_parser import validate_youtube_url
+
 
 class URLInput(ctk.CTkFrame):
     def __init__(self, parent, on_enter: Callable[[str], None]):
@@ -30,9 +32,16 @@ class URLInput(ctk.CTkFrame):
     def _on_url_change(self, *args):
         current_url = self.url_var.get().strip()
 
-        if current_url != self._last_processed_url:
-            self._last_processed_url = current_url
-            self.on_enter(current_url)
+        validated_url = validate_youtube_url(current_url)
+
+        if not validated_url:
+            self.set_error()
+            return
+
+        if validated_url != self._last_processed_url:
+            self.set_normal()
+            self._last_processed_url = validated_url
+            self.on_enter(validated_url)
 
     def get_url(self) -> str:
         return self.url_var.get().strip()
