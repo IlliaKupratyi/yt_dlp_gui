@@ -40,11 +40,11 @@ class BaseFlag(ABC):
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}({self.to_args()})"
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
         if not isinstance(other, self.__class__):
             return False
-        return self.value == other.value
+        return bool(self.value == other.value)
 
     """Creates a copy of the flag"""
-    def clone(self):
+    def clone(self) -> "BaseFlag":
         return self.__class__(self.value)

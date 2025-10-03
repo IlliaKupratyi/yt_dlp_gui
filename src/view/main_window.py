@@ -51,17 +51,17 @@ class MainWindow:
 
         logger.info("MainWindow initialized")
 
-    def setup(self):
+    def setup(self) -> None:
         self.url_input.pack(pady=(20, 10))
         self.output_selector.pack(pady=(0, 15), padx=20, fill="x")
         logger.info("MainWindow setup complete")
 
-    def on_url_enter(self, url: str):
+    def on_url_enter(self, url: str) -> None:
         self.progress_indicator.show_indeterminate("Fetching video info...")
 
-        def load_task():
+        def load_task() -> None:
             try:
-                def on_output(line: str):
+                def on_output(line: str) -> None:
                     # noinspection PyTypeChecker
                     self.root.after(0, lambda: self.progress_indicator.label.configure(text=f"Loading... {line}"))
                 self.controller.setup_video_properties(url=url.strip(), on_output=on_output)
@@ -79,18 +79,18 @@ class MainWindow:
         logger.info("MainWindow. Fetching video info...")
         threading.Thread(target=load_task, daemon=True).start()
 
-    def on_download(self):
+    def on_download(self) -> None:
         if not self.controller.url:
             return
 
         self._set_flags()
 
         self.progress_indicator.show_indeterminate("Downloading video...")
-        def on_output(line: str):
+        def on_output(line: str) -> None:
             # noinspection PyTypeChecker
             self.root.after(0, lambda: self.progress_indicator.label.configure(text=f"Loading... {line}"))
 
-        def on_complete(result: dict):
+        def on_complete(result: dict) -> None:
             logger.info("Video download complete. Result:\n" + str(result))
             self._finish_download()
 
@@ -100,7 +100,7 @@ class MainWindow:
             on_complete=on_complete
         )
 
-    def _show_download_settings(self):
+    def _show_download_settings(self) -> None:
         self.progress_indicator.pack_forget()
         self.video_info_panel.set_title(self.controller.get_title())
         self.video_info_panel.pack(pady=(0, 15), padx=20, fill="x")
@@ -114,11 +114,11 @@ class MainWindow:
             self.controller.get_subtitles()
         )
 
-    def _on_output_folder_change(self, folder: str):
+    def _on_output_folder_change(self, folder: str) -> None:
         logger.info("MainWindow. Output folder changed to " + folder)
         self.output_folder = folder
 
-    def _on_video_info_loaded(self):
+    def _on_video_info_loaded(self) -> None:
         logger.info("MainWindow. On video info loaded.")
         self.url_input.set_normal()
         self._show_download_settings()
@@ -126,20 +126,20 @@ class MainWindow:
         self.progress_indicator.hide()
         self.download_button.pack()
 
-    def _on_video_info_error(self):
+    def _on_video_info_error(self) -> None:
         logger.info("MainWindow. On video info error")
         self.url_input.set_error()
         self.progress_indicator.hide()
         self.download_button.pack_forget()
         self.download_settings.pack_forget()
 
-    def _set_flags(self):
+    def _set_flags(self) -> None:
         self.controller.add_flag(OutputPathsFlag(self.output_folder))
 
         for flag in self.download_settings.get_flags():
             self.controller.add_flag(flag)
 
-    def _finish_download(self):
+    def _finish_download(self) -> None:
         logger.info("MainWindow. Finish downloading")
         self.progress_indicator.hide()
         self.download_button.set_normal()

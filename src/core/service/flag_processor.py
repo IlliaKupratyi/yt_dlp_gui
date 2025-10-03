@@ -12,14 +12,14 @@ Adds required flags and prevents conflicting flags.
 Flags are stored as instances; dependencies are defined as classes.
 """
 class FlagProcessor:
-    def __init__(self):
+    def __init__(self) -> None:
         self.flags: list[BaseFlag] = []
         logger.info("FlagProcessor initialized")
 
     """
     Add a flag to the processor, with resolution of dependencies and conflicts.
     """
-    def add_flag(self, flag : BaseFlag):
+    def add_flag(self, flag : BaseFlag) -> None:
         if flag in self.flags:
             return
 
@@ -34,7 +34,7 @@ class FlagProcessor:
 
         logger.info("FlagProcessor. Flag " + flag.name + " added")
 
-    def remove_flag(self, flag : BaseFlag):
+    def remove_flag(self, flag : BaseFlag) -> None:
         self.flags.remove(flag)
 
         for required_flag in flag.requires:
@@ -57,11 +57,11 @@ class FlagProcessor:
 
         return self.flags
 
-    def clear_flags(self):
+    def clear_flags(self) -> None:
         logger.info("FlagProcessor. Flags cleared")
         self.flags = []
 
-    def _add_required_flags(self, flag: BaseFlag):
+    def _add_required_flags(self, flag: BaseFlag) -> None:
         for required_class in flag.requires:
             if not any(isinstance(existing, required_class) for existing in self.flags):
                 self.flags.append(required_class())

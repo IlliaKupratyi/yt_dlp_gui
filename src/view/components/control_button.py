@@ -1,10 +1,10 @@
-from typing import Optional, Callable
+from typing import Optional, Callable, Any
 
 import customtkinter as ctk
 
 class ControlButton(ctk.CTkButton):
     def __init__(self,
-                 parent,
+                 parent: Any,
                  text: str = "Download",
                  command: Optional[Callable[[], None]] = None,
                  width: int = 150,
@@ -23,13 +23,13 @@ class ControlButton(ctk.CTkButton):
         self.set_waiting()
 
     """Handle button click"""
-    def _on_click(self):
+    def _on_click(self) -> None:
         if self._state == "normal" and self._original_command:
             self._original_command()
         self.set_loading()
 
     """Set button to normal (ready) state."""
-    def set_normal(self):
+    def set_normal(self) -> None:
         self.configure(
             text=self._original_text,
             command=self._on_click,
@@ -38,7 +38,7 @@ class ControlButton(ctk.CTkButton):
         self._state = "normal"
 
     """Set button to loading state (disabled)."""
-    def set_loading(self, text: str = "Downloading..."):
+    def set_loading(self, text: str = "Downloading...") -> None:
         self.configure(
             text=text,
             command=None,
@@ -46,7 +46,7 @@ class ControlButton(ctk.CTkButton):
         )
         self._state = "loading"
 
-    def set_waiting(self, text: str = "Enter video URL"):
+    def set_waiting(self, text: str = "Enter video URL") -> None:
         self.configure(
             text=text,
             command=None,

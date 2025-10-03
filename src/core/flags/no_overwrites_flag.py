@@ -5,5 +5,5 @@ class NoOverwritesFlag(BaseFlag):
     name = "no-overwrites"
     short_name = "w"
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()

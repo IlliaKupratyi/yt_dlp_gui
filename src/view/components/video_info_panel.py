@@ -1,7 +1,9 @@
+from typing import Any
+
 import customtkinter as ctk
 
 class VideoInfoPanel(ctk.CTkFrame):
-    def __init__(self, parent):
+    def __init__(self, parent: Any):
         super().__init__(parent)
 
         self.title_label = ctk.CTkLabel(
@@ -14,5 +16,5 @@ class VideoInfoPanel(ctk.CTkFrame):
 
         self.title_label.pack(pady=(10, 15))
 
-    def set_title(self, title: str):
+    def set_title(self, title: str) -> None:
         self.title_label.configure(text=title)

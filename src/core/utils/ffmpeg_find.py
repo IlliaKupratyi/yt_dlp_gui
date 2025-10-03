@@ -9,4 +9,8 @@ def find_ffmpeg_path() -> str:
         validate_absolute_path(path)
     except ValueError:
         return ""
-    return path
+
+    if isinstance(path, str):
+        return path
+
+    return ""

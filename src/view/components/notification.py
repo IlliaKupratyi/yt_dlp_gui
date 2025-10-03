@@ -43,7 +43,7 @@ class ToastNotification:
         self.window.after(duration, self.hide)
 
     """Position window in bottom-right corner of parent or screen."""
-    def _position_window(self, width: int, height: int, parent: Optional[ctk.CTk]):
+    def _position_window(self, width: int, height: int, parent: Optional[ctk.CTk]) -> None:
         if parent and parent.winfo_viewable():
             # Position relative to parent window
             x = parent.winfo_rootx() + parent.winfo_width() - width - 80
@@ -58,6 +58,6 @@ class ToastNotification:
         self.window.geometry(f"{width}x{height}+{x}+{y}")
 
     """Hide and destroy the notification."""
-    def hide(self):
+    def hide(self) -> None:
         if self.window.winfo_exists():
             self.window.destroy()

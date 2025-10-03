@@ -5,5 +5,5 @@ class IgnoreErrorsFlag(BaseFlag):
     name = "ignore-errors"
     short_name = "i"
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()

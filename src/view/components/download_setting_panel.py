@@ -1,7 +1,7 @@
 import logging
 
 import customtkinter as ctk
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Any
 
 from src.core.config.flag_config import AVAILABLE_PRESETS, AVAILABLE_THUMBNAILS_FORMATS
 from src.core.dataclass.subtitle import Subtitles
@@ -23,7 +23,7 @@ from src.view.components.scrollable_option_menu import ScrollableOptionMenu
 logger = logging.getLogger("yt_dlp_gui")
 
 class DownloadSettingsPanel(ctk.CTkFrame):
-    def __init__(self, parent):
+    def __init__(self, parent: Any):
         super().__init__(parent)
         self.parent = parent
         self.formats: List[Dict[str, str]] = []
@@ -93,7 +93,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
 
         self.lang_frame = ctk.CTkFrame(self.subtitles_frame)
         self.lang_frame.pack(anchor="w", padx=20, pady=(5, 10), fill="x")
-        self.lang_checkboxes = {}
+        self.lang_checkboxes: dict[str, ctk.CTkCheckBox] = {}
 
         # === 3. Thumbnails ===
         self.thumbnail_frame = ctk.CTkFrame(self)
@@ -157,7 +157,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         logger.info("DownloadSettingsPanel initialized")
 
     """Update available formats and subtitles languages"""
-    def update_video_info(self, formats: List[Dict[str, str]], subtitles: Subtitles):
+    def update_video_info(self, formats: List[Dict[str, str]], subtitles: Subtitles) -> None:
         self.formats = formats
         self.subtitles = subtitles
 
@@ -168,7 +168,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         self.is_initialized = True
 
     """Update checkboxes subtitles languages"""
-    def _update_subtitles_langs(self):
+    def _update_subtitles_langs(self) -> None:
         for widget in self.lang_checkboxes.values():
             widget.destroy()
         self.lang_checkboxes.clear()
@@ -194,7 +194,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
             self.write_subs_check.configure(text="Download subtitles")
             self.write_subs_check.configure(state="normal")
 
-    def _on_preset_toggle(self):
+    def _on_preset_toggle(self) -> None:
         if self.use_preset_var.get():
             self.preset_dropdown.configure(state="normal")
             self.format_dropdown.configure(state="disabled")
@@ -202,20 +202,25 @@ class DownloadSettingsPanel(ctk.CTkFrame):
             self.format_dropdown.configure(state="normal")
             self.preset_dropdown.configure(state="disabled")
 
-    def _on_subs_toggle(self):
+    def _on_subs_toggle(self) -> None:
         if self.write_subs_var.get():
             self.lang_frame.pack(anchor="w", padx=20, pady=(5, 10), fill="x")
         else:
             self.lang_frame.pack_forget()
 
-    def _on_thumb_toggle(self):
+    def _on_thumb_toggle(self) -> None:
         if self.write_thumb_var.get():
             self.thumb_format_dropdown.configure(state="normal")
         else:
             self.thumb_format_dropdown.configure(state="disabled")
 
     def get_flags(self) -> list[BaseFlag]:
-        flags:list[BaseFlag] = [self._get_format_flag()]
+
+        flags: list[BaseFlag] = []
+        flag = self._get_format_flag()
+
+        if flag is not None:
+            flags.append(flag)
 
         flags.extend(self._get_subs_flag())
 
@@ -269,6 +274,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
                 return FormatFlag(self.format_dropdown.get())
             except FlagValidatorError:
                 logger.error("DownloadSettingsPanel. Format flag validation failed")
+        return None
 
     def _get_subs_flag(self) -> list[BaseFlag]:
         flags:list[BaseFlag] = []

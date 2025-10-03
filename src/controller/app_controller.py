@@ -17,18 +17,18 @@ from src.core.utils.subtitles_lister import subtitles_parse_output
 logger = logging.getLogger("yt_dlp_gui")
 
 class AppController:
-    def __init__(self):
+    def __init__(self) -> None:
         self.runner = YTDLPRunner()
         self.flag_processor = FlagProcessor()
         self.url: str = ""
-        self.subtitles: Optional[Subtitles] = None
+        self.subtitles:Subtitles = Subtitles([], [])
         self.formats: list[dict[str, str]] = []
         self.title: str = ""
         self.is_running: bool = False
         self.download_thread: Optional[threading.Thread] = None
         logger.info("AppController initialized")
 
-    def setup_video_properties(self, url: str, on_output: Optional[Callable[[str], None]] = None):
+    def setup_video_properties(self, url: str, on_output: Optional[Callable[[str], None]] = None) -> None:
         if not url:
             logger.error("AppController error. No url provided")
             raise ValueError('Url cannot be empty')
@@ -62,11 +62,9 @@ class AppController:
             self.formats = formats_parse_output(output_lines)
             self.title = output_lines[-1]
 
-            output_lines: list[str] = []
-
         except Exception as e:
             logger.error("AppController error. When setup video properties, subprocess error: " + str(e))
-            self.subtitles = None
+            self.subtitles = Subtitles([], [])
             self.formats = []
             raise YTDLRuntimeError(e)
 
@@ -79,16 +77,16 @@ class AppController:
     def get_title(self) -> str:
         return self.title
 
-    def add_flag(self, flag: BaseFlag):
+    def add_flag(self, flag: BaseFlag) -> None:
         self.flag_processor.add_flag(flag)
 
-    def remove_flag(self, flag: BaseFlag):
+    def remove_flag(self, flag: BaseFlag) -> None:
         self.flag_processor.remove_flag(flag)
 
-    def clear_flags(self):
+    def clear_flags(self) -> None:
         self.flag_processor.clear_flags()
 
-    def get_flags(self):
+    def get_flags(self) -> list[BaseFlag]:
         return self.flag_processor.get_flags()
 
     def start_downloading(self,
@@ -99,7 +97,7 @@ class AppController:
         if self.is_running:
             return None
 
-        def download_task():
+        def download_task() -> None:
             result = None
             try:
                 result = self.runner.run(url=self.url, on_output=on_output)

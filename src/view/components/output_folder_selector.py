@@ -1,6 +1,6 @@
 import customtkinter as ctk
 from pathlib import Path
-from typing import Callable, Optional
+from typing import Callable, Optional, Any, cast
 
 """
 UI component for selecting an output folder.
@@ -8,7 +8,7 @@ UI component for selecting an output folder.
 class OutputFolderSelector(ctk.CTkFrame):
     def __init__(
             self,
-            parent,
+            parent: Any,
             label_text: str = "Save to:",
             default_path: str = "",
             on_change: Optional[Callable[[str], None]] = None,
@@ -47,7 +47,7 @@ class OutputFolderSelector(ctk.CTkFrame):
     """
     Open system folder dialog and update the entry with selected path.
     """
-    def _select_folder(self):
+    def _select_folder(self) -> None:
         current = self.entry.get()
 
         # Use current path if valid, otherwise default to user's home directory
@@ -65,7 +65,7 @@ class OutputFolderSelector(ctk.CTkFrame):
     """
     Handle manual path input (via Enter or focus loss).
     """
-    def _on_entry_change(self):
+    def _on_entry_change(self) -> None:
         path = self.entry.get().strip()
         if path:
             self._trigger_change(path)
@@ -73,7 +73,7 @@ class OutputFolderSelector(ctk.CTkFrame):
     """
     Call the on_change callback if it exists.
     """
-    def _trigger_change(self, path: str):
+    def _trigger_change(self, path: str) -> None:
         if self.on_change:
             self.on_change(path)
 
@@ -81,12 +81,13 @@ class OutputFolderSelector(ctk.CTkFrame):
     Return the current folder path from the entry field.
     """
     def get_path(self) -> str:
-        return self.entry.get().strip()
+        value = self.entry.get()
+        return cast(str, value).strip()
 
     """
     Set the folder path and trigger callback.
     """
-    def set_path(self, path: str):
+    def set_path(self, path: str) -> None:
         self.entry.delete(0, "end")
         self.entry.insert(0, path)
         self._trigger_change(path)

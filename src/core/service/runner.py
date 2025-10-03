@@ -81,5 +81,5 @@ class YTDLPRunner:
             "cmd": cmd,
         }
 
-    def clear_flags(self):
+    def clear_flags(self) -> None:
         self.flags = []
