@@ -16,16 +16,20 @@ from src.view.components.video_info_panel import VideoInfoPanel
 
 logger = logging.getLogger("yt_dlp_gui")
 
+"""
+Main application window that coordinates UI components and controller interaction
+"""
 class MainWindow:
     def __init__(self, root: ctk.CTk, controller: AppController, width: int = 800):
         self.root = root
         self.controller = controller
 
+        # Scrollable container for all UI elements
         self.scrollable_frame = ctk.CTkScrollableFrame(root, width=width, fg_color="transparent")
         self.scrollable_frame.pack(fill="both", expand=True)
 
+        # UI components
         self.url_input = URLInput(self.scrollable_frame, self.on_url_enter)
-
         self.output_selector = OutputFolderSelector(
             self.scrollable_frame,
             label_text="Save to:",
@@ -34,11 +38,9 @@ class MainWindow:
         )
 
         self.output_folder = DATA_DIR
-
         self.video_info_panel = VideoInfoPanel(self.scrollable_frame)
 
         self.download_settings = DownloadSettingsPanel(self.scrollable_frame)
-
         self.download_button = ControlButton(
             self.scrollable_frame,
             text="Download Video",
@@ -51,11 +53,13 @@ class MainWindow:
 
         logger.info("MainWindow initialized")
 
+    """Pack initial UI components"""
     def setup(self) -> None:
         self.url_input.pack(pady=(20, 10))
         self.output_selector.pack(pady=(0, 15), padx=20, fill="x")
         logger.info("MainWindow setup complete")
 
+    """Handle URL submission: fetch video metadata in background"""
     def on_url_enter(self, url: str) -> None:
         self.progress_indicator.show_indeterminate("Fetching video info...")
 
@@ -79,6 +83,7 @@ class MainWindow:
         logger.info("MainWindow. Fetching video info...")
         threading.Thread(target=load_task, daemon=True).start()
 
+    """Start video download with current settings"""
     def on_download(self) -> None:
         if not self.controller.url:
             return
@@ -100,6 +105,7 @@ class MainWindow:
             on_complete=on_complete
         )
 
+    """Display video info and download settings after metadata is loaded"""
     def _show_download_settings(self) -> None:
         self.progress_indicator.pack_forget()
         self.video_info_panel.set_title(self.controller.get_title())
@@ -114,10 +120,12 @@ class MainWindow:
             self.controller.get_subtitles()
         )
 
+    """Update output folder when user selects a new path."""
     def _on_output_folder_change(self, folder: str) -> None:
         logger.info("MainWindow. Output folder changed to " + folder)
         self.output_folder = folder
 
+    """Handle successful metadata loading"""
     def _on_video_info_loaded(self) -> None:
         logger.info("MainWindow. On video info loaded.")
         self.url_input.set_normal()
@@ -126,6 +134,7 @@ class MainWindow:
         self.progress_indicator.hide()
         self.download_button.pack()
 
+    """Handle metadata loading failure"""
     def _on_video_info_error(self) -> None:
         logger.info("MainWindow. On video info error")
         self.url_input.set_error()
@@ -133,12 +142,14 @@ class MainWindow:
         self.download_button.pack_forget()
         self.download_settings.pack_forget()
 
+    """Apply user-selected flags to the controller before download"""
     def _set_flags(self) -> None:
         self.controller.add_flag(OutputPathsFlag(self.output_folder))
 
         for flag in self.download_settings.get_flags():
             self.controller.add_flag(flag)
 
+    """Finalize UI after download completes"""
     def _finish_download(self) -> None:
         logger.info("MainWindow. Finish downloading")
         self.progress_indicator.hide()

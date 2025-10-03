@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 
-
+"""
+Data class for storing video subtitles
+"""
 @dataclass
 class Subtitles:
         subtitles: list[dict[str, str]]

@@ -16,6 +16,9 @@ from src.core.utils.subtitles_lister import subtitles_parse_output
 
 logger = logging.getLogger("yt_dlp_gui")
 
+"""
+Coordinates video metadata fetching, flag management, and downloading
+"""
 class AppController:
     def __init__(self) -> None:
         self.runner = YTDLPRunner()
@@ -28,6 +31,7 @@ class AppController:
         self.download_thread: Optional[threading.Thread] = None
         logger.info("AppController initialized")
 
+    """Fetch video metadata (formats, subtitles, title) using yt-dlp."""
     def setup_video_properties(self, url: str, on_output: Optional[Callable[[str], None]] = None) -> None:
         if not url:
             logger.error("AppController error. No url provided")
@@ -60,7 +64,8 @@ class AppController:
 
             self.subtitles = subtitles_parse_output(output_lines)
             self.formats = formats_parse_output(output_lines)
-            self.title = output_lines[-1]
+            if len(output_lines) > 0:
+                self.title = output_lines[-1]
 
         except Exception as e:
             logger.error("AppController error. When setup video properties, subprocess error: " + str(e))
@@ -89,6 +94,7 @@ class AppController:
     def get_flags(self) -> list[BaseFlag]:
         return self.flag_processor.get_flags()
 
+    """Start video download in a background thread."""
     def start_downloading(self,
                           on_output: Optional[Callable[[str], None]] = None,
                           on_complete: Optional[Callable[[dict], None]] = None) -> Optional[threading.Thread]:

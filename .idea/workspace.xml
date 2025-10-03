@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Flag processor tests">
-      <change afterPath="$PROJECT_DIR$/tests/core/flags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/core/flags/test_flags.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/core/service/test_runner.py" afterDir="false" />
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Test and comments for flags classes">
+      <change afterPath="$PROJECT_DIR$/tests/controller/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/controller/test_app_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/base_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/base_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/convert_thumbnails_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/convert_thumbnails_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/embed_thumbnail_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/embed_thumbnail_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/ffmpeg_location_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/ffmpeg_location_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/format_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/format_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/print_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/print_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/logger/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/logger/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/app_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/app_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/config/flag_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/config/flag_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/dataclass/subtitle.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/dataclass/subtitle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/main_window.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +50,7 @@
     "Python tests.Python tests for tests.test_format_lister.test_formats_parse_output_parses_valid_lines.executor": "Run",
     "Python tests.Python tests in D:/Projects/pythonProjects/yt_dlp_gui/tests/test_zoom.py.executor": "Run",
     "Python tests.Python tests in test_zoom.py.executor": "Run",
-    "Python tests.pytest in tests.executor": "Run",
+    "Python tests.pytest in tests.executor": "Coverage",
     "Python.main.executor": "Run",
     "Python.main_window.executor": "Run",
     "Python.runner.executor": "Run",
@@ -217,15 +213,7 @@
       <workItem from="1759430317127" duration="2988000" />
       <workItem from="1759441310046" duration="596000" />
       <workItem from="1759481946807" duration="2962000" />
-      <workItem from="1759485105239" duration="15647000" />
-    </task>
-    <task id="LOCAL-00001" summary="Initial project + BaseFlag">
-      <option name="closed" value="true" />
-      <created>1758528998802</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1758528998802</updated>
+      <workItem from="1759485105239" duration="19141000" />
     </task>
     <task id="LOCAL-00002" summary="Refactor packages">
       <option name="closed" value="true" />
@@ -611,7 +599,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759507471636</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Test and comments for flags classes">
+      <option name="closed" value="true" />
+      <created>1759509556946</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1759509556947</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,7 +625,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="VideoInfoPanel component" />
     <MESSAGE value="Fix subtitles_lister" />
     <MESSAGE value="DownloadSettingsPanel" />
     <MESSAGE value="MainWindow" />
@@ -654,7 +649,8 @@
     <MESSAGE value="Refactor code by mypy" />
     <MESSAGE value="Expand utils tests" />
     <MESSAGE value="Flag processor tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Flag processor tests" />
+    <MESSAGE value="Test and comments for flags classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test and comments for flags classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -675,7 +671,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/yt_dlp_gui$test_path_validator.coverage" NAME="test_path_validator Coverage Results" MODIFIED="1758640517150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$main_window.coverage" NAME="main_window Coverage Results" MODIFIED="1759074498856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/view" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1759509116121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1759510079071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$.coverage" NAME=" Coverage Results" MODIFIED="1759505958124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$runner.coverage" NAME="runner Coverage Results" MODIFIED="1758634057776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/core" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1759495528970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
