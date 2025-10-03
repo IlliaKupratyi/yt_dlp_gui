@@ -12,7 +12,6 @@ from src.view.components.notification import ToastNotification
 from src.view.components.progress_bar import ProgressBar
 from src.view.components.output_folder_selector import OutputFolderSelector
 from src.view.components.url_input import URLInput
-from src.view.components.video_info_panel import VideoInfoPanel
 
 logger = logging.getLogger("yt_dlp_gui")
 
@@ -26,7 +25,6 @@ class MainWindow:
 
         self.url_input = URLInput(self.scrollable_frame, self.on_url_enter)
 
-        self.video_info = VideoInfoPanel(self.scrollable_frame)
         self.output_selector = OutputFolderSelector(
             self.scrollable_frame,
             label_text="Save to:",
@@ -52,7 +50,6 @@ class MainWindow:
 
     def setup(self):
         self.url_input.pack(pady=(20, 10))
-        self.video_info.pack(pady=(10, 15), padx=20, fill="x")
         self.output_selector.pack(pady=(0, 15), padx=20, fill="x")
         logger.info("MainWindow setup complete")
 
@@ -65,7 +62,6 @@ class MainWindow:
                     # noinspection PyTypeChecker
                     self.root.after(0, lambda: self.progress_indicator.label.configure(text=f"Loading... {line}"))
                 self.controller.setup_video_properties(url=url.strip(), on_output=on_output)
-                self.video_info.update_info(self.controller.get_formats(), self.controller.get_subtitles())
                 self.download_button.set_normal()
                 if len(self.controller.get_formats()) == 0:
                     # noinspection PyTypeChecker
@@ -119,7 +115,6 @@ class MainWindow:
 
     def _on_video_info_loaded(self):
         logger.info("MainWindow. On video info loaded.")
-        self.video_info.update_info(self.controller.get_formats(), self.controller.get_subtitles())
         self.url_input.set_normal()
         self._show_download_settings()
         self.download_button.set_normal()

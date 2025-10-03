@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Package refactor">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Add no_overwrite_files and ignore_errors to download settings panel">
       <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/components/download_setting_panel.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/components/download_setting_panel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/components/video_info_panel.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/main_window.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,7 +201,7 @@
       <workItem from="1759417676839" duration="934000" />
       <workItem from="1759430317127" duration="2988000" />
       <workItem from="1759441310046" duration="596000" />
-      <workItem from="1759481946807" duration="299000" />
+      <workItem from="1759481946807" duration="674000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -539,7 +539,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759413429977</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Add no_overwrite_files and ignore_errors to download settings panel">
+      <option name="closed" value="true" />
+      <created>1759482337637</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1759482337637</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -557,7 +565,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="PresetAliasFlag" />
     <MESSAGE value="find_ffmpeg_path, FfmpegLocationFlag, WriteThumbnailFlag, ConvertThumbnailsFlag" />
     <MESSAGE value="EmbedThumbnailFlag" />
     <MESSAGE value="FlagProcessor" />
@@ -582,7 +589,8 @@
     <MESSAGE value="Refactor utils" />
     <MESSAGE value="Logger" />
     <MESSAGE value="Package refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Package refactor" />
+    <MESSAGE value="Add no_overwrite_files and ignore_errors to download settings panel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add no_overwrite_files and ignore_errors to download settings panel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -601,6 +609,6 @@
     <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1759180152114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$.coverage" NAME=" Coverage Results" MODIFIED="1759076010583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$runner.coverage" NAME="runner Coverage Results" MODIFIED="1758634057776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/core" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1759418229901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1759482373315" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
