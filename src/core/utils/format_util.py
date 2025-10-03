@@ -22,6 +22,7 @@ def formats_parse_output(output_formats: list[str]) -> list[dict[str, str]]:
         })
     return formats
 
+"""Convert a list of preset names to a list of {id, value} dicts."""
 def presets_to_dict(presets: list[str]) -> list[dict[str, str]]:
     result_dict: list[dict[str, str]] = []
     for preset in presets:
@@ -29,6 +30,7 @@ def presets_to_dict(presets: list[str]) -> list[dict[str, str]]:
 
     return result_dict
 
+"""Convert raw format dicts to {id, value} dicts for UI display."""
 def formats_to_dict(formats: list[dict[str, str]]) -> list[dict[str, str]]:
     result_dict: list[dict[str, str]] = []
     for format_value in formats:
@@ -36,6 +38,7 @@ def formats_to_dict(formats: list[dict[str, str]]) -> list[dict[str, str]]:
 
     return result_dict
 
+"""Remove items with duplicate 'value' fields, keeping first occurrence."""
 def filter_by_unique_values(items: list[dict[str, str]]) -> list[dict[str, str]]:
         seen_values = set()
         unique_items = []

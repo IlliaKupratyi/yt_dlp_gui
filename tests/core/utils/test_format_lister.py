@@ -1,4 +1,4 @@
-from src.core.utils.format_util import formats_parse_output
+from src.core.utils.format_util import formats_parse_output, presets_to_dict, formats_to_dict, filter_by_unique_values
 
 
 def test_formats_parse_output_parses_valid_lines():
@@ -62,6 +62,7 @@ def test_formats_parse_output_handles_missing_fields():
     assert result[0]["id"] == "137"
     assert result[0]["tbr"] == "3020k"
 
+
 def test_formats_parse_output_handles_truncated_line():
     lines = [
         "ID EXT RESOLUTION FPS CH | FILESIZE TBR PROTO | VCODEC VBR ACODEC ABR ASR MORE INFO",
@@ -85,3 +86,42 @@ def test_formats_parse_output_ignores_lines_with_invalid_id():
 def test_formats_parse_output_empty_input():
     result = formats_parse_output([])
     assert result == []
+
+def test_presets_to_dict():
+    presets = ["MP4 1080p", "MP3"]
+    result = presets_to_dict(presets)
+    expected = [
+        {"id": "mp4 1080p", "value": "MP4 1080p"},
+        {"id": "mp3", "value": "MP3"}
+    ]
+    assert result == expected
+
+def test_formats_to_dict():
+    formats = [
+        {"id": "137", "ext": "mp4", "resolution": "1920x1080"},
+        {"id": "140", "ext": "m4a", "resolution": "audio only"}
+    ]
+    result = formats_to_dict(formats)
+    expected = [
+        {"id": "137", "value": "mp4 1920x1080"},
+        {"id": "140", "value": "m4a audio only"}
+    ]
+    assert result == expected
+
+def test_filter_by_unique_values():
+    items = [
+        {"id": "1", "value": "mp4 1080p"},
+        {"id": "2", "value": "mp4 720p"},
+        {"id": "3", "value": "mp4 1080p"},  # duplicate
+        {"id": "4", "value": "webm 1080p"}
+    ]
+    result = filter_by_unique_values(items)
+    expected = [
+        {"id": "1", "value": "mp4 1080p"},
+        {"id": "2", "value": "mp4 720p"},
+        {"id": "4", "value": "webm 1080p"}
+    ]
+    assert result == expected
+
+def test_filter_by_unique_values_empty():
+    assert filter_by_unique_values([]) == []

@@ -11,7 +11,6 @@ def validate_youtube_url(url: str) -> str | None:
     url = url.split('&', 1)[0]
 
     if not re.match(r'^https?://', url):
-        # Пробуем добавить схему, если её нет
         if url.startswith(('youtube.com/', 'www.youtube.com/', 'youtu.be/')):
             url = 'https://' + url
         else:
