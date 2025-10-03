@@ -9,6 +9,8 @@ from src.core.exceptions.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 from src.core.flags.convert_thumbnails_flag import ConvertThumbnailsFlag
 from src.core.flags.format_flag import FormatFlag
+from src.core.flags.ignore_errors_flag import IgnoreErrorsFlag
+from src.core.flags.no_overwrites_flag import NoOverwritesFlag
 from src.core.flags.preset_alias_flag import PresetAliasFlag
 from src.core.flags.write_subs_flag import WriteSubsFlag
 from src.core.flags.sub_langs_flag import SubLangsFlag
@@ -133,6 +135,25 @@ class DownloadSettingsPanel(ctk.CTkFrame):
         )
         self.write_link_check.pack(pady=(10, 20), padx=10, anchor="w")
 
+        # === 5. Other settings ===
+
+        self.ignore_errors_var = ctk.BooleanVar(value=True)
+        self.ignore_errors_check = ctk.CTkCheckBox(
+            self,
+            text="Continue downloading while errors",
+            variable=self.ignore_errors_var
+        )
+        self.ignore_errors_check.pack(anchor="w", padx=10, pady=(0, 10))
+
+        self.no_overwrite_files_var = ctk.BooleanVar(value=False)
+        self.no_overwrite_files_check = ctk.CTkCheckBox(
+            self,
+            text="Do not overwrite files",
+            variable=self.no_overwrite_files_var
+        )
+        self.no_overwrite_files_check.pack(anchor="w", padx=10, pady=(0, 10))
+
+
         logger.info("DownloadSettingsPanel initialized")
 
     """Update available formats and subtitles languages"""
@@ -220,6 +241,20 @@ class DownloadSettingsPanel(ctk.CTkFrame):
                 flags.append(WriteLinkFlag())
             except FlagValidatorError:
                 logger.error("DownloadSettingsPanel. Link flag validation failed")
+
+        # Ignore errors
+        if self.ignore_errors_var.get():
+            try:
+                flags.append(IgnoreErrorsFlag())
+            except FlagValidatorError:
+                logger.error("DownloadSettingsPanel. Ignore error flag validation failed")
+
+        # No overwrite files
+        if self.no_overwrite_files_var.get():
+            try:
+                flags.append(NoOverwritesFlag())
+            except FlagValidatorError:
+                logger.error("DownloadSettingsPanel. No overwrites flag validation failed")
 
         return flags
 

@@ -4,39 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Logger">
-      <change afterPath="$PROJECT_DIR$/src/core/exceptions/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/logger/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/service/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/core/utils/__init__.py" afterDir="false" />
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Package refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/controller/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/controller/app_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/app_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/exceptions/exception.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flag_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/service/flag_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/base_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/base_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/convert_thumbnails_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/convert_thumbnails_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/ffmpeg_location_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/ffmpeg_location_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/format_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/format_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/output_paths_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/output_paths_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/preset_alias_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/preset_alias_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/flags/sub_langs_flag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/flags/sub_langs_flag.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/logger/logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/runner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/service/runner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/console_output_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/console_output_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/ffmpeg_find.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/ffmpeg_find.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/format_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/format_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/path_validator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/path_validator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/subtitles_lister.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/subtitles_lister.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/app.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/components/download_setting_panel.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/components/download_setting_panel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_flag_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_flag_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_format_lister.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_format_lister.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_path_validator.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_path_validator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_subtitles_lister.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_subtitles_lister.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,30 +35,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests in test_zoom.py.executor": "Run",
-    "Python tests.pytest in tests.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.main_window.executor": "Run",
-    "Python.runner.executor": "Run",
-    "Python.test_path_validator.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Projects/pythonProjects/yt_dlp_gui",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests in test_zoom.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.pytest in tests.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_window.executor&quot;: &quot;Run&quot;,
+    &quot;Python.runner.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_path_validator.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/pythonProjects/yt_dlp_gui&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\pythonProjects\yt_dlp_gui\src\core" />
@@ -226,7 +197,11 @@
       <workItem from="1759312566573" duration="25000" />
       <workItem from="1759313863726" duration="7932000" />
       <workItem from="1759398439973" duration="9000000" />
-      <workItem from="1759408039581" duration="5007000" />
+      <workItem from="1759408039581" duration="5029000" />
+      <workItem from="1759417676839" duration="934000" />
+      <workItem from="1759430317127" duration="2988000" />
+      <workItem from="1759441310046" duration="596000" />
+      <workItem from="1759481946807" duration="299000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -556,7 +531,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759411210578</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Package refactor">
+      <option name="closed" value="true" />
+      <created>1759413429977</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1759413429977</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -574,7 +557,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="IgnoreErrorsFlag" />
     <MESSAGE value="PresetAliasFlag" />
     <MESSAGE value="find_ffmpeg_path, FfmpegLocationFlag, WriteThumbnailFlag, ConvertThumbnailsFlag" />
     <MESSAGE value="EmbedThumbnailFlag" />
@@ -599,7 +581,8 @@
     <MESSAGE value="Add only unique formats to download_setting_panel" />
     <MESSAGE value="Refactor utils" />
     <MESSAGE value="Logger" />
-    <option name="LAST_COMMIT_MESSAGE" value="Logger" />
+    <MESSAGE value="Package refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Package refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -618,6 +601,6 @@
     <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1759180152114" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$.coverage" NAME=" Coverage Results" MODIFIED="1759076010583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$runner.coverage" NAME="runner Coverage Results" MODIFIED="1758634057776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/core" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1759412606179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1759418229901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
