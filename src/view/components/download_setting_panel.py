@@ -124,6 +124,7 @@ class DownloadSettingsPanel(ctk.CTkFrame):
             width=120,
             state="normal"
         )
+        self.thumb_format_dropdown.configure(state="disabled")
         self.thumb_format_dropdown.pack(anchor="w", padx=20, pady=(5, 10))
 
         self.embed_thumb_var = ctk.BooleanVar(value=False)

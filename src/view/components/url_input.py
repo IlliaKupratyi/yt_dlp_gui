@@ -31,7 +31,7 @@ class URLInput(ctk.CTkFrame):
         self.url_state="normal"
 
     """Validate URL on every change and trigger callback if valid and new."""
-    def _on_url_change(self) -> None:
+    def _on_url_change(self, *args:tuple[Any, ...]) -> None:
         current_url = self.url_var.get().strip()
 
         validated_url = validate_youtube_url(current_url)
