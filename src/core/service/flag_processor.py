@@ -34,6 +34,7 @@ class FlagProcessor:
 
         logger.info("FlagProcessor. Flag " + flag.name + " added")
 
+    """Remove a flag and its required flags (if not used elsewhere)."""
     def remove_flag(self, flag : BaseFlag) -> None:
         self.flags.remove(flag)
 
@@ -57,10 +58,12 @@ class FlagProcessor:
 
         return self.flags
 
+    """Clear all flags."""
     def clear_flags(self) -> None:
         logger.info("FlagProcessor. Flags cleared")
         self.flags = []
 
+    """Add missing required flags for the given flag."""
     def _add_required_flags(self, flag: BaseFlag) -> None:
         for required_class in flag.requires:
             if not any(isinstance(existing, required_class) for existing in self.flags):

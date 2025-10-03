@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Refactor code by mypy">
+    <list default="true" id="c767bd5c-c1b2-46b0-990f-2ea0b2d345df" name="Changes" comment="Expand utils tests">
+      <change afterPath="$PROJECT_DIR$/tests/core/service/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/core/service/test_flag_processor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utils/console_output_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/console_output_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utils/format_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/format_util.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/utils/link_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/utils/link_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_format_lister.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_format_lister.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_path_validator.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_path_validator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/service/flag_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/service/flag_processor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,10 +43,11 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for tests.test_ffmpeg_find.test_find_ffmpeg_path_returns_string.executor": "Coverage",
     "Python tests.Python tests for tests.test_format_lister.test_formats_parse_output_parses_valid_lines.executor": "Run",
     "Python tests.Python tests in D:/Projects/pythonProjects/yt_dlp_gui/tests/test_zoom.py.executor": "Run",
     "Python tests.Python tests in test_zoom.py.executor": "Run",
-    "Python tests.pytest in tests.executor": "Coverage",
+    "Python tests.pytest in tests.executor": "Run",
     "Python.main.executor": "Run",
     "Python.main_window.executor": "Run",
     "Python.runner.executor": "Run",
@@ -70,11 +69,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\pythonProjects\yt_dlp_gui\tests\core\utils" />
       <recent name="D:\Projects\pythonProjects\yt_dlp_gui\src\core" />
       <recent name="D:\Projects\pythonProjects\yt_dlp_gui\src" />
       <recent name="D:\Projects\pythonProjects\yt_dlp_gui\src\app\core\logger" />
       <recent name="D:\Projects\pythonProjects\yt_dlp_gui\src\controller" />
-      <recent name="D:\Projects\pythonProjects\yt_dlp_gui" />
     </key>
   </component>
   <component name="RunManager" selected="Python tests.pytest in tests">
@@ -211,7 +210,7 @@
       <workItem from="1759430317127" duration="2988000" />
       <workItem from="1759441310046" duration="596000" />
       <workItem from="1759481946807" duration="2962000" />
-      <workItem from="1759485105239" duration="12179000" />
+      <workItem from="1759485105239" duration="13822000" />
     </task>
     <task id="LOCAL-00001" summary="Initial project + BaseFlag">
       <option name="closed" value="true" />
@@ -589,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759503136040</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Expand utils tests">
+      <option name="closed" value="true" />
+      <created>1759506085836</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1759506085836</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -607,7 +614,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="AppController" />
     <MESSAGE value="URLInput component" />
     <MESSAGE value="VideoInfoPanel component" />
     <MESSAGE value="Fix subtitles_lister" />
@@ -632,15 +638,16 @@
     <MESSAGE value="Add link parser" />
     <MESSAGE value="Print Flag" />
     <MESSAGE value="Refactor code by mypy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor code by mypy" />
+    <MESSAGE value="Expand utils tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Expand utils tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tests/test_flag_processor.py</url>
-          <line>102</line>
-          <option name="timeStamp" value="14" />
+          <url>file://$PROJECT_DIR$/tests/core/service/test_flag_processor.py</url>
+          <line>61</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -648,8 +655,8 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/yt_dlp_gui$test_path_validator.coverage" NAME="test_path_validator Coverage Results" MODIFIED="1758640517150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$main_window.coverage" NAME="main_window Coverage Results" MODIFIED="1759074498856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/view" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1759505394355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/yt_dlp_gui$.coverage" NAME=" Coverage Results" MODIFIED="1759505338192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$pytest_in_tests.coverage" NAME="pytest in tests Coverage Results" MODIFIED="1759507453196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/yt_dlp_gui$.coverage" NAME=" Coverage Results" MODIFIED="1759505958124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$runner.coverage" NAME="runner Coverage Results" MODIFIED="1758634057776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/core" />
     <SUITE FILE_PATH="coverage/yt_dlp_gui$main.coverage" NAME="main Coverage Results" MODIFIED="1759495528970" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
