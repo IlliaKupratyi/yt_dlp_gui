@@ -5,12 +5,7 @@ from src.core.exceptions.exception import FlagValidatorError
 
 """
 An abstract base class for all flags
-Each flag is responsible for:
-- its own validation
-- formatting into CLI arguments
-- compatibility with other flags
 """
-
 class BaseFlag(ABC):
     name: str = "" # flag name
     short_name: Optional[str] = "" # flag shor name

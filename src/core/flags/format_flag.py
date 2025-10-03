@@ -1,7 +1,9 @@
 from src.core.exceptions.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 
-
+"""
+Video format code
+"""
 class FormatFlag(BaseFlag):
     name = "format"
     shortname = "f"

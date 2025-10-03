@@ -1,10 +1,11 @@
 import logging
 import sys
 from pathlib import Path
+from logging.handlers import RotatingFileHandler
 
 from src.core.config.config import LOG_DIR
 
-
+"""Configure a logger with file rotation and optional console output."""
 def setup_logger(
         name: str = "yt_dlp_gui",
         level: int = logging.INFO,
@@ -16,18 +17,22 @@ def setup_logger(
     logger = logging.getLogger(name)
     logger.setLevel(level)
 
+    # Avoid duplicate handlers if logger already configured
     if logger.hasHandlers():
         return logger
 
+    # Ensure log directory exists
     log_dir = Path(LOG_DIR)
+    log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / "app.log"
 
+    # Standard log format
     formatter = logging.Formatter(
         fmt="%(asctime)s [%(levelname)-8s] %(name)s:%(funcName)s:%(lineno)d — %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S"
     )
 
-    from logging.handlers import RotatingFileHandler
+    # Rotating file handler (10 MB max, keep 3 backups)
     file_handler = RotatingFileHandler(
         log_file,
         maxBytes=max_file_size,
@@ -38,6 +43,7 @@ def setup_logger(
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
+    # Optional console output
     if log_to_console:
         console_handler = logging.StreamHandler(sys.stdout)
         console_handler.setLevel(level)

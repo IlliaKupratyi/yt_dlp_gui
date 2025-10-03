@@ -2,7 +2,9 @@ from src.core.exceptions.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 from src.core.utils.path_validator import validate_absolute_path
 
-
+"""
+Location of the ffmpeg binary; either the path to the binary or its containing directory
+"""
 class FfmpegLocationFlag(BaseFlag):
     name = "ffmpeg-location"
     short_name = ""
