@@ -9,7 +9,7 @@ class VideoInfoPanel(ctk.CTkFrame):
 
         self.title_label = ctk.CTkLabel(
             self,
-            text="📹 Media information",
+            text="Media information",
             font=("Arial", 20, "bold"),
             wraplength=700,
             justify="center"
