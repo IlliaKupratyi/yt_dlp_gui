@@ -1,9 +1,11 @@
-from src.core.flags.base_flag import BaseFlag
-
 """
 Write subtitle file
 """
+from src.core.flags.base_flag import BaseFlag
+
+
 class WriteSubsFlag(BaseFlag):
+    """Class foe write-subs flag"""
     name = "write-subs"
     short_name = ""
 

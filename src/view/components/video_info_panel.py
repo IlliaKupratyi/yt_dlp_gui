@@ -1,9 +1,13 @@
+"""
+The element witch displays video title or media info
+"""
+
 from typing import Any
 
 import customtkinter as ctk
 
-"""Displays video title or media info."""
 class VideoInfoPanel(ctk.CTkFrame):
+    """Displays video title or media info."""
     def __init__(self, parent: Any):
         super().__init__(parent)
 
@@ -16,6 +20,6 @@ class VideoInfoPanel(ctk.CTkFrame):
         )
         self.title_label.pack(pady=(10, 15))
 
-    """Update displayed title."""
     def set_title(self, title: str) -> None:
+        """Update displayed title."""
         self.title_label.configure(text=title)

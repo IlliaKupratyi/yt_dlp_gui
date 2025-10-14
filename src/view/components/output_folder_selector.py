@@ -1,11 +1,14 @@
-import customtkinter as ctk
-from pathlib import Path
-from typing import Callable, Optional, Any, cast
-
 """
 UI component for selecting an output folder.
 """
+
+from pathlib import Path
+from typing import Callable, Optional, Any, cast
+import customtkinter as ctk
+
+
 class OutputFolderSelector(ctk.CTkFrame):
+    """Class for selecting an output folder."""
     def __init__(
             self,
             parent: Any,
@@ -44,10 +47,8 @@ class OutputFolderSelector(ctk.CTkFrame):
         self.entry.bind("<Return>", self._on_entry_change)
         self.entry.bind("<FocusOut>", self._on_entry_change)
 
-    """
-    Open system folder dialog and update the entry with selected path.
-    """
     def _select_folder(self) -> None:
+        """Open system folder dialog and update the entry with selected path."""
         current = self.entry.get()
 
         # Use current path if valid, otherwise default to user's home directory
@@ -62,32 +63,24 @@ class OutputFolderSelector(ctk.CTkFrame):
             self.entry.insert(0, folder)
             self._trigger_change(folder)
 
-    """
-    Handle manual path input (via Enter or focus loss).
-    """
     def _on_entry_change(self) -> None:
+        """Position window in bottom-right corner of parent or screen."""
         path = self.entry.get().strip()
         if path:
             self._trigger_change(path)
 
-    """
-    Call the on_change callback if it exists.
-    """
     def _trigger_change(self, path: str) -> None:
+        """Call the on_change callback if it exists."""
         if self.on_change:
             self.on_change(path)
 
-    """
-    Return the current folder path from the entry field.
-    """
     def get_path(self) -> str:
+        """Return the current folder path from the entry field."""
         value = self.entry.get()
         return cast(str, value).strip()
 
-    """
-    Set the folder path and trigger callback.
-    """
     def set_path(self, path: str) -> None:
+        """Position window in bottom-right corner of parent or screen."""
         self.entry.delete(0, "end")
         self.entry.insert(0, path)
         self._trigger_change(path)

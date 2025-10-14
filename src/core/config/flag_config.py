@@ -1,3 +1,6 @@
+"""
+Flag config
+"""
 from src.core.flags.base_flag import BaseFlag
 from src.core.flags.output_paths_flag import OutputPathsFlag
 

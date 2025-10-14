@@ -1,5 +1,6 @@
-"""Check if any line contains a known yt-dlp error indicator."""
+"""Util to handle console output."""
 def has_error( output_lines: list[str]) -> bool:
+    """Check if any line contains a known yt-dlp error indicator."""
     error_indicators = [
         "ERROR:",
         "Unable to extract",

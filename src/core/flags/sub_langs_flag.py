@@ -1,10 +1,12 @@
-from src.core.exceptions.exception import FlagValidatorError
-from src.core.flags.base_flag import BaseFlag
-
 """
 Languages of the subtitles to download
 """
+from src.core.exceptions.exception import FlagValidatorError
+from src.core.flags.base_flag import BaseFlag
+
+
 class SubLangsFlag(BaseFlag):
+    """Class foe sub langs flag"""
     name: str = "sub-langs"
     short_name: str = ""
 

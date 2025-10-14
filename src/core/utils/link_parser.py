@@ -1,10 +1,12 @@
+"""
+Util for process links
+"""
 import re
 from urllib.parse import urlparse
 
-"""
-Validates and cleans a YouTube URL.
-"""
+
 def validate_youtube_url(url: str) -> str | None:
+    """Validates and cleans a YouTube URL."""
     if not url or not isinstance(url, str):
         return None
 
@@ -18,7 +20,7 @@ def validate_youtube_url(url: str) -> str | None:
 
     try:
         parsed = urlparse(url)
-    except Exception:
+    except (ValueError, OSError):
         return None
 
     netloc = parsed.netloc.lower().replace('www.', '')

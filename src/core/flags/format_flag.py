@@ -1,10 +1,12 @@
-from src.core.exceptions.exception import FlagValidatorError
-from src.core.flags.base_flag import BaseFlag
-
 """
 Video format code
 """
+from src.core.exceptions.exception import FlagValidatorError
+from src.core.flags.base_flag import BaseFlag
+
+
 class FormatFlag(BaseFlag):
+    """Class foe format flag"""
     name = "format"
     shortname = "f"
 

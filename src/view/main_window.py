@@ -1,3 +1,6 @@
+"""
+Main application window that coordinates UI components and controller interaction
+"""
 import logging
 import threading
 
@@ -5,6 +8,7 @@ import customtkinter as ctk
 
 from src.core.config.config import DATA_DIR
 from src.controller.app_controller import AppController
+from src.core.exceptions.exception import YTDLRuntimeError
 from src.core.flags.output_paths_flag import OutputPathsFlag
 from src.view.components.control_button import ControlButton
 from src.view.components.download_setting_panel import DownloadSettingsPanel
@@ -16,10 +20,9 @@ from src.view.components.video_info_panel import VideoInfoPanel
 
 logger = logging.getLogger("yt_dlp_gui")
 
-"""
-Main application window that coordinates UI components and controller interaction
-"""
+
 class MainWindow:
+    """Class for main application window that coordinates UI components and controller interaction"""
     def __init__(self, root: ctk.CTk, controller: AppController, width: int = 800):
         self.root = root
         self.controller = controller
@@ -53,14 +56,14 @@ class MainWindow:
 
         logger.info("MainWindow initialized")
 
-    """Pack initial UI components"""
     def setup(self) -> None:
+        """Pack initial UI components"""
         self.url_input.pack(pady=(20, 10))
         self.output_selector.pack(pady=(0, 15), padx=20, fill="x")
         logger.info("MainWindow setup complete")
 
-    """Handle URL submission: fetch video metadata in background"""
     def on_url_enter(self, url: str) -> None:
+        """Handle URL submission: fetch video metadata in background"""
         self.progress_indicator.show_indeterminate("Fetching video info...")
 
         def load_task() -> None:
@@ -76,15 +79,15 @@ class MainWindow:
                 else:
                     # noinspection PyTypeChecker
                     self.root.after(0, self._on_video_info_loaded)
-            except Exception as e:
-                logger.error("MainWindow. Error with loading video info. " + str(e))
+            except (YTDLRuntimeError, ValueError, OSError) as e:
+                logger.error("MainWindow. Error with loading video info. %s", str(e))
                 self._on_video_info_error()
 
         logger.info("MainWindow. Fetching video info...")
         threading.Thread(target=load_task, daemon=True).start()
 
-    """Start video download with current settings"""
     def on_download(self) -> None:
+        """Start video download with current settings"""
         if not self.controller.url:
             return
 
@@ -96,7 +99,7 @@ class MainWindow:
             self.root.after(0, lambda: self.progress_indicator.label.configure(text=f"Loading... {line}"))
 
         def on_complete(result: dict) -> None:
-            logger.info("Video download complete. Result:\n" + str(result))
+            logger.info("Video download complete. Result:\n%s", str(result))
             self._finish_download()
 
         logger.info("MainWindow. Downloading video...")
@@ -105,8 +108,8 @@ class MainWindow:
             on_complete=on_complete
         )
 
-    """Display video info and download settings after metadata is loaded"""
     def _show_download_settings(self) -> None:
+        """Display video info and download settings after metadata is loaded"""
         self.progress_indicator.pack_forget()
         self.video_info_panel.set_title(self.controller.get_title())
         self.video_info_panel.pack(pady=(0, 15), padx=20, fill="x")
@@ -120,13 +123,13 @@ class MainWindow:
             self.controller.get_subtitles()
         )
 
-    """Update output folder when user selects a new path."""
     def _on_output_folder_change(self, folder: str) -> None:
-        logger.info("MainWindow. Output folder changed to " + folder)
+        """Update output folder when user selects a new path."""
+        logger.info("MainWindow. Output folder changed to %s", folder)
         self.output_folder = folder
 
-    """Handle successful metadata loading"""
     def _on_video_info_loaded(self) -> None:
+        """Handle successful metadata loading"""
         logger.info("MainWindow. On video info loaded.")
         self.url_input.set_normal()
         self._show_download_settings()
@@ -134,23 +137,23 @@ class MainWindow:
         self.progress_indicator.hide()
         self.download_button.pack()
 
-    """Handle metadata loading failure"""
     def _on_video_info_error(self) -> None:
+        """Handle metadata loading failure"""
         logger.info("MainWindow. On video info error")
         self.url_input.set_error()
         self.progress_indicator.hide()
         self.download_button.pack_forget()
         self.download_settings.pack_forget()
 
-    """Apply user-selected flags to the controller before download"""
     def _set_flags(self) -> None:
+        """Apply user-selected flags to the controller before download"""
         self.controller.add_flag(OutputPathsFlag(self.output_folder))
 
         for flag in self.download_settings.get_flags():
             self.controller.add_flag(flag)
 
-    """Finalize UI after download completes"""
     def _finish_download(self) -> None:
+        """Finalize UI after download completes"""
         logger.info("MainWindow. Finish downloading")
         self.progress_indicator.hide()
         self.download_button.set_normal()

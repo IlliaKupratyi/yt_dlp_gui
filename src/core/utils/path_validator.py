@@ -1,3 +1,6 @@
+"""
+Util for validating system path
+"""
 import sys
 import os
 from pathlib import Path

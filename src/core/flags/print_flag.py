@@ -1,11 +1,13 @@
+"""
+Print some information about video
+"""
 from src.core.config.flag_config import AVAILABLE_PRINT_VALUES
 from src.core.exceptions.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 
-"""
-Print some information about video
-"""
+
 class PrintFlag(BaseFlag):
+    """Class foe print flag"""
     name: str = "print"
     short_name = "O"
 

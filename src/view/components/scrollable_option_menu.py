@@ -1,10 +1,13 @@
+"""
+Scrollable dropdown menu with custom items.
+"""
 from functools import partial
 from typing import Optional, Callable, Any
 
 import customtkinter as ctk
 
-"""Scrollable dropdown menu with custom items."""
 class ScrollableOptionMenu(ctk.CTkFrame):
+    """Class for scrollable dropdown menu with custom items."""
     def __init__(self,
                  parent: Any, values:list[dict[str, str]],
                  command: Optional[Callable[[str], None]] = None,
@@ -27,8 +30,8 @@ class ScrollableOptionMenu(ctk.CTkFrame):
         self.button.pack()
         self.menu_window = None
 
-    """Toggle menu visibility."""
     def _on_click(self) -> None:
+        """Scrollable dropdown menu with custom items."""
         if not self.is_active:
             self.is_active = True
             self._open_menu()
@@ -37,8 +40,8 @@ class ScrollableOptionMenu(ctk.CTkFrame):
             if self.menu_window:
                 self.menu_window.destroy()
 
-    """Create and show the dropdown menu."""
     def _open_menu(self) -> None:
+        """Create and show the dropdown menu."""
         if self.menu_window and self.menu_window.winfo_exists():
             self.menu_window.destroy()
 
@@ -49,7 +52,7 @@ class ScrollableOptionMenu(ctk.CTkFrame):
                 self.menu_window = ctk.CTkToplevel(root)
             else:
                 self.menu_window = ctk.CTkToplevel()
-        except Exception:
+        except (RuntimeError, OSError, ValueError):
             self.menu_window = ctk.CTkToplevel()
 
         if self.menu_window is None:
@@ -85,8 +88,8 @@ class ScrollableOptionMenu(ctk.CTkFrame):
             self.menu_window.geometry(f"{250}x{height}")
         scroll_frame.configure(height=height)
 
-    """Handle item selection."""
     def _select(self, value:dict[str, str]) -> None:
+        """Create and show the dropdown menu."""
         self.selected_value = value
 
         display_text = value["value"]
@@ -100,8 +103,8 @@ class ScrollableOptionMenu(ctk.CTkFrame):
 
         self.is_active = False
 
-    """Update menu items or button state."""
     def configure(self, values:Optional[list[dict[str, str]]] = None, state:str="", **kwargs: dict[str, Any]) -> None:
+        """Update menu items or button state."""
         if values:
             self.values = values
             self.selected_value = self.values[0] if self.values else {'id': '', 'value': ''}
@@ -111,6 +114,6 @@ class ScrollableOptionMenu(ctk.CTkFrame):
         elif state == "normal":
             self.button.configure(state="normal")
 
-    """Return ID of selected item."""
     def get(self) -> str:
+        """Return ID of selected item."""
         return self.selected_value['id']

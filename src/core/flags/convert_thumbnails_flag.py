@@ -1,10 +1,12 @@
-from src.core.exceptions.exception import FlagValidatorError
-from src.core.flags.base_flag import BaseFlag
-
 """
 Convert the thumbnails to another format
 """
+from src.core.exceptions.exception import FlagValidatorError
+from src.core.flags.base_flag import BaseFlag
+
+
 class ConvertThumbnailsFlag(BaseFlag):
+    """Flag class for converting thumbnails to another format"""
     name = "convert-thumbnails"
     supported_formats = ["png", "jpg", "webp"]
 

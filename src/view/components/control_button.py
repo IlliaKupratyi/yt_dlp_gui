@@ -1,9 +1,12 @@
+"""
+Button with states: normal, waiting, loading
+"""
 from typing import Optional, Callable, Any
 
 import customtkinter as ctk
 
-"""Button with states: normal, waiting, loading"""
 class ControlButton(ctk.CTkButton):
+    """Class for button with states: normal, waiting, loading"""
     def __init__(self,
                  parent: Any,
                  text: str = "Download",
@@ -23,14 +26,14 @@ class ControlButton(ctk.CTkButton):
         self._state = "normal"
         self.set_waiting()
 
-    """Handle button click"""
     def _on_click(self) -> None:
+        """Handle button click"""
         if self._state == "normal" and self._original_command:
             self._original_command()
         self.set_loading()
 
-    """Set button to normal (ready) state."""
     def set_normal(self) -> None:
+        """Set button to normal (ready) state."""
         self.configure(
             text=self._original_text,
             command=self._on_click,
@@ -38,8 +41,8 @@ class ControlButton(ctk.CTkButton):
         )
         self._state = "normal"
 
-    """Set button to loading state (disabled)."""
     def set_loading(self, text: str = "Downloading...") -> None:
+        """Set button to normal (ready) state."""
         self.configure(
             text=text,
             command=None,
@@ -48,6 +51,7 @@ class ControlButton(ctk.CTkButton):
         self._state = "loading"
 
     def set_waiting(self, text: str = "Enter video URL") -> None:
+        """Set button to waiting state."""
         self.configure(
             text=text,
             command=None,
@@ -55,6 +59,7 @@ class ControlButton(ctk.CTkButton):
         )
         self._state = "waiting"
 
-    """Execute original command and switch to loading state."""
+
     def get_state(self) -> str:
+        """Execute original command and switch to loading state."""
         return self._state

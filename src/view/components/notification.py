@@ -1,11 +1,13 @@
-import customtkinter as ctk
-from typing import Optional
-
 """
 A temporary popup notification that auto-hides after a delay.
 Appears in the bottom-right corner of the screen by default.
 """
+from typing import Optional
+import customtkinter as ctk
+
+
 class ToastNotification:
+    """Class for toasting notifications."""
     def __init__(
             self,
             message: str,
@@ -40,8 +42,8 @@ class ToastNotification:
         # noinspection PyTypeChecker
         self.window.after(duration, self.hide)
 
-    """Position window in bottom-right corner of parent or screen."""
     def _position_window(self, width: int, height: int, parent: Optional[ctk.CTk]) -> None:
+        """Position window in bottom-right corner of parent or screen."""
         if parent and parent.winfo_viewable():
             # Position relative to parent window
             x = parent.winfo_rootx() + parent.winfo_width() - width - 80
@@ -55,7 +57,7 @@ class ToastNotification:
 
         self.window.geometry(f"{width}x{height}+{x}+{y}")
 
-    """Hide and destroy the notification."""
     def hide(self) -> None:
+        """Hide and destroy the notification."""
         if self.window.winfo_exists():
             self.window.destroy()

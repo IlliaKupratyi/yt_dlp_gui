@@ -1,12 +1,15 @@
+"""
+An abstract base class for all flags
+"""
 from abc import ABC
 from typing import Optional, Any
 
 from src.core.exceptions.exception import FlagValidatorError
 
-"""
-An abstract base class for all flags
-"""
 class BaseFlag(ABC):
+    """
+    An abstract base class for all flags
+    """
     name: str = "" # flag name
     short_name: Optional[str] = "" # flag shor name
     deprecated: bool = False # is the flag obsolete
@@ -16,16 +19,15 @@ class BaseFlag(ABC):
     def __init__(self, value: Any = None):
         self.value = value
 
-    """Validating the flag value. Called during initialization"""
     def _validate(self) -> None:
-        pass
+        """Validating the flag value. Called during initialization"""
 
-    """Formatting into CLI arguments"""
     def to_args(self) -> list[str]:
+        """Formatting into CLI arguments"""
         return ["--" + self.name]
 
-    """Checks that the flag is valid (does not throw exceptions)"""
     def is_valid(self) -> bool:
+        """Checks that the flag is valid (does not throw exceptions)"""
         try:
             self._validate()
             return True
@@ -40,6 +42,6 @@ class BaseFlag(ABC):
             return False
         return bool(self.value == other.value)
 
-    """Creates a copy of the flag"""
     def clone(self) -> "BaseFlag":
+        """Creates a copy of the flag"""
         return self.__class__(self.value)

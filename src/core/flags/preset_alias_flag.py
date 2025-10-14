@@ -1,13 +1,15 @@
+"""
+Applies a predefined set of options
+"""
 from typing import List
 
 from src.core.config.flag_config import AVAILABLE_PRESETS
 from src.core.exceptions.exception import FlagValidatorError
 from src.core.flags.base_flag import BaseFlag
 
-"""
-Applies a predefined set of options
-"""
+
 class PresetAliasFlag(BaseFlag):
+    """Class foe preset alias"""
     name = "preset-alias"
     short_name = "t"
 

@@ -1,3 +1,5 @@
+"""App Controller. Connect view and logic"""
+import subprocess
 import threading
 from typing import Optional, Callable
 import logging
@@ -16,10 +18,8 @@ from src.core.utils.subtitles_lister import subtitles_parse_output
 
 logger = logging.getLogger("yt_dlp_gui")
 
-"""
-Coordinates video metadata fetching, flag management, and downloading
-"""
 class AppController:
+    """Coordinates video metadata fetching, flag management, and downloading"""
     def __init__(self) -> None:
         self.runner = YTDLPRunner()
         self.flag_processor = FlagProcessor()
@@ -31,8 +31,8 @@ class AppController:
         self.download_thread: Optional[threading.Thread] = None
         logger.info("AppController initialized")
 
-    """Fetch video metadata (formats, subtitles, title) using yt-dlp."""
     def setup_video_properties(self, url: str, on_output: Optional[Callable[[str], None]] = None) -> None:
+        """Fetch video metadata (formats, subtitles, title) using yt-dlp."""
         if not url:
             logger.error("AppController error. No url provided")
             raise ValueError('Url cannot be empty')
@@ -43,7 +43,7 @@ class AppController:
         output_lines: list[str] = []
 
         def collect_line(line: str) -> None:
-            logger.info("YT-DLP. " + line)
+            logger.info("YT-DLP. %s", line)
             output_lines.append(line)
             if on_output:
                 on_output(line)
@@ -59,7 +59,7 @@ class AppController:
                     (line for line in output_lines if "ERROR:" in line),
                     "Unknown error occurred"
                 )
-                logger.error("AppController error. When setup video properties, subprocess error: " + error_msg)
+                logger.error("AppController error. When setup video properties, subprocess error: %s", error_msg)
                 raise RuntimeError(f"yt-dlp error: {error_msg}")
 
             self.subtitles = subtitles_parse_output(output_lines)
@@ -68,36 +68,43 @@ class AppController:
                 self.title = output_lines[-1]
 
         except Exception as e:
-            logger.error("AppController error. When setup video properties, subprocess error: " + str(e))
+            logger.error("AppController error. When setup video properties, subprocess error: %s", str(e))
             self.subtitles = Subtitles([], [])
             self.formats = []
-            raise YTDLRuntimeError(e)
+            raise YTDLRuntimeError(e) from e
 
     def get_subtitles(self) -> Subtitles:
+        """Get subtitles"""
         return self.subtitles
 
     def get_formats(self) -> list[dict[str, str]]:
+        """Get formats"""
         return self.formats
 
     def get_title(self) -> str:
+        """Get title"""
         return self.title
 
     def add_flag(self, flag: BaseFlag) -> None:
+        """Add flag"""
         self.flag_processor.add_flag(flag)
 
     def remove_flag(self, flag: BaseFlag) -> None:
+        """Remove flag"""
         self.flag_processor.remove_flag(flag)
 
     def clear_flags(self) -> None:
+        """Clear flags"""
         self.flag_processor.clear_flags()
 
     def get_flags(self) -> list[BaseFlag]:
+        """Get flags"""
         return self.flag_processor.get_flags()
 
-    """Start video download in a background thread."""
     def start_downloading(self,
                           on_output: Optional[Callable[[str], None]] = None,
                           on_complete: Optional[Callable[[dict], None]] = None) -> Optional[threading.Thread]:
+        """Start video download in a background thread."""
         self.runner.add_flag(self.get_flags())
 
         if self.is_running:
@@ -107,8 +114,8 @@ class AppController:
             result = None
             try:
                 result = self.runner.run(url=self.url, on_output=on_output)
-            except Exception as e:
-                logger.error("AppController error. When downloading video properties: " + str(e))
+            except (YTDLRuntimeError, subprocess.CalledProcessError, OSError) as e:
+                logger.error("AppController error. When downloading video properties: %s", str(e))
                 result = {"return_code": -1, "error": str(e)}
             finally:
                 self.is_running = False

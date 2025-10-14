@@ -1,12 +1,12 @@
+"""
+Custom exceptions
+"""
 
-"""An error occurred while executing yt-dlp"""
 class YTDLRuntimeException(Exception):
-    pass
+    """An error occurred while executing yt-dlp"""
 
-"""Flag validation error"""
 class FlagValidatorError(Exception):
-    pass
+    """Flag validation error"""
 
-"""Yt-dlp error"""
 class YTDLRuntimeError(Exception):
-    pass
+    """Yt-dlp error"""
