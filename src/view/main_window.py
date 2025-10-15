@@ -72,7 +72,8 @@ class MainWindow:
                     # noinspection PyTypeChecker
                     self.root.after(0, lambda: self.progress_indicator.label.configure(text=f"Loading... {line}"))
                 self.controller.setup_video_properties(url=url.strip(), on_output=on_output)
-                self.download_button.set_normal()
+                # noinspection PyTypeChecker
+                self.root.after(0, self.download_button.set_normal)
                 if len(self.controller.get_formats()) == 0:
                     # noinspection PyTypeChecker
                     self.root.after(0, self._on_video_info_error)
@@ -81,7 +82,8 @@ class MainWindow:
                     self.root.after(0, self._on_video_info_loaded)
             except (YTDLRuntimeError, ValueError, OSError) as e:
                 logger.error("MainWindow. Error with loading video info. %s", str(e))
-                self._on_video_info_error()
+                # noinspection PyTypeChecker
+                self.root.after(0, self._on_video_info_error)
 
         logger.info("MainWindow. Fetching video info...")
         threading.Thread(target=load_task, daemon=True).start()
@@ -100,7 +102,8 @@ class MainWindow:
 
         def on_complete(result: dict) -> None:
             logger.info("Video download complete. Result:\n%s", str(result))
-            self._finish_download()
+            # noinspection PyTypeChecker
+            self.root.after(0, self._finish_download)
 
         logger.info("MainWindow. Downloading video...")
         self.controller.start_downloading(
