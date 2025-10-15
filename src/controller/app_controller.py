@@ -64,8 +64,16 @@ class AppController:
 
             self.subtitles = subtitles_parse_output(output_lines)
             self.formats = formats_parse_output(output_lines)
+
+            output_lines = []
+
+            propertiesRunner.clear_flags()
+            propertiesRunner.add_flag([PrintFlag("title")])
+
+            propertiesRunner.run(url, on_output=collect_line)
+
             if len(output_lines) > 0:
-                self.title = output_lines[-1]
+                self.title = output_lines[0]
 
         except Exception as e:
             logger.error("AppController error. When setup video properties, subprocess error: %s", str(e))
