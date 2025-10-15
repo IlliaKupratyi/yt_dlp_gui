@@ -144,6 +144,7 @@ class MainWindow:
         """Handle metadata loading failure"""
         logger.info("MainWindow. On video info error")
         self.url_input.set_error()
+        self.video_info_panel.pack_forget()
         self.progress_indicator.hide()
         self.download_button.pack_forget()
         self.download_settings.pack_forget()
