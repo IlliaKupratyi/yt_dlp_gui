@@ -103,7 +103,7 @@ class ScrollableOptionMenu(ctk.CTkFrame):
 
         self.is_active = False
 
-    def configure(self, values:Optional[list[dict[str, str]]] = None, state:str="", **kwargs: dict[str, Any]) -> None:
+    def configure(self, values:Optional[list[dict[str, str]]] = None, state:str="", **_: dict[str, Any]) -> None:
         """Update menu items or button state."""
         if values:
             self.values = values

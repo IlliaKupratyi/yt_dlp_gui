@@ -32,7 +32,7 @@ class URLInput(ctk.CTkFrame):
         self.entry.pack(side="left", padx=10, fill="x", expand=True)
         self.url_state="normal"
 
-    def _on_url_change(self, *args:tuple[Any, ...]) -> None:
+    def _on_url_change(self, *_: tuple[Any, ...]) -> None:
         """Validate URL on every change and trigger callback if valid and new."""
         current_url = self.url_var.get().strip()
 
