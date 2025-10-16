@@ -20,9 +20,17 @@ class YouTubeClient:
                 if 'title' in response["items"][0]["snippet"]:
                     youtube_video['title'] = response["items"][0]["snippet"]["title"]
 
-                if ('thumbnails' in response["items"][0]["snippet"] and
-                    'default' in response["items"][0]["snippet"]["thumbnails"]):
-                    youtube_video['thumbnail'] = response["items"][0]["snippet"]["thumbnails"]["default"]["url"]
+                if 'thumbnails' in response["items"][0]["snippet"]:
+                    if 'maxres' in response["items"][0]["snippet"]["thumbnails"]:
+                        youtube_video['thumbnail'] = response["items"][0]["snippet"]["thumbnails"]["maxres"]["url"]
+                    elif 'standard' in response["items"][0]["snippet"]["thumbnails"]:
+                        youtube_video['thumbnail'] = response["items"][0]["snippet"]["thumbnails"]["standard"]["url"]
+                    elif 'high' in response["items"][0]["snippet"]["thumbnails"]:
+                        youtube_video['thumbnail'] = response["items"][0]["snippet"]["thumbnails"]["high"]["url"]
+                    elif 'medium' in response["items"][0]["snippet"]["thumbnails"]:
+                        youtube_video['thumbnail'] = response["items"][0]["snippet"]["thumbnails"]["medium"]["url"]
+                    elif 'default' in response["items"][0]["snippet"]["thumbnails"]:
+                        youtube_video['thumbnail'] = response["items"][0]["snippet"]["thumbnails"]["default"]["url"]
 
             if ('contentDetails' in response["items"][0] and
                     'duration' in response["items"][0]["contentDetails"]):
