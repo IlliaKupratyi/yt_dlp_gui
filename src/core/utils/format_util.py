@@ -1,6 +1,10 @@
 """
 Format util
 """
+
+from isodate import parse_duration as parse_iso_duration
+
+
 def formats_parse_output(output_formats: list[str]) -> list[dict[str, str]]:
     """Parses a string returned by yt-dlp. Returns a dictionary."""
     formats: list[dict[str, str]] = []
@@ -51,3 +55,18 @@ def filter_by_unique_values(items: list[dict[str, str]]) -> list[dict[str, str]]
             seen_values.add(value)
             unique_items.append(item)
     return unique_items
+
+def format_duration(duration: str) -> str:
+    """Convert ISO 8601 duration to 'hh:mm:ss' or 'mm:ss'."""
+    try:
+        td = parse_iso_duration(duration)
+        total_seconds = int(td.total_seconds())
+        hours, remainder = divmod(total_seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+
+        if hours:
+            return f"{hours}:{minutes:02d}:{seconds:02d}"
+        else:
+            return f"{minutes}:{seconds:02d}"
+    except Exception:
+        return "0:00"

@@ -4,35 +4,36 @@ import threading
 from typing import Optional, Callable
 import logging
 
+from src.clients.youtube_client import YouTubeClient
 from src.core.dataclass.subtitle import Subtitles
+from src.core.dataclass.youtube_video import YouTubeVideo
 from src.core.exceptions.exception import YTDLRuntimeError
-from src.core.flags.print_flag import PrintFlag
 from src.core.service.flag_processor import FlagProcessor
 from src.core.flags.base_flag import BaseFlag
 from src.core.flags.format_list_flag import FormatListFlag
 from src.core.flags.list_subs_flag import ListSubsFlag
 from src.core.service.runner import YTDLPRunner
 from src.core.utils.console_output_util import has_error
-from src.core.utils.format_util import formats_parse_output
+from src.core.utils.format_util import formats_parse_output, format_duration
+from src.core.utils.link_parser import extract_youtube_id
 from src.core.utils.subtitles_lister import subtitles_parse_output
 
 logger = logging.getLogger("yt_dlp_gui")
 
 class AppController:
     """Coordinates video metadata fetching, flag management, and downloading"""
-    def __init__(self) -> None:
+    def __init__(self, api_token: str) -> None:
         self.runner = YTDLPRunner()
         self.flag_processor = FlagProcessor()
         self.url: str = ""
-        self.subtitles:Subtitles = Subtitles([], [])
-        self.formats: list[dict[str, str]] = []
-        self.title: str = ""
         self.is_running: bool = False
         self.download_thread: Optional[threading.Thread] = None
+        self.youtube_client: YouTubeClient = YouTubeClient(api_token)
+        self.youtube_video: Optional[YouTubeVideo] = None
         logger.info("AppController initialized")
 
     def setup_video_properties(self, url: str, on_output: Optional[Callable[[str], None]] = None) -> None:
-        """Fetch video metadata (formats, subtitles, title) using yt-dlp."""
+        """Fetch video metadata (formats, subtitles, title) using YouTube api and yt-dlp."""
         if not url:
             logger.error("AppController error. No url provided")
             raise ValueError('Url cannot be empty')
@@ -51,6 +52,11 @@ class AppController:
         logger.info("AppController. Start getting video properties.")
 
         try:
+            video_type, video_id = extract_youtube_id(self.url)
+            youtube_video_api_properties: dict[str, str] = {}
+            if video_type == "video":
+                youtube_video_api_properties = self.youtube_client.get_video_list(video_id)
+
             propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag()])
             propertiesRunner.run(url, on_output=collect_line)
 
@@ -62,36 +68,54 @@ class AppController:
                 logger.error("AppController error. When setup video properties, subprocess error: %s", error_msg)
                 raise RuntimeError(f"yt-dlp error: {error_msg}")
 
-            self.subtitles = subtitles_parse_output(output_lines)
-            self.formats = formats_parse_output(output_lines)
+            subtitles = subtitles_parse_output(output_lines)
+            formats = formats_parse_output(output_lines)
 
-            output_lines = []
-
-            propertiesRunner.clear_flags()
-            propertiesRunner.add_flag([PrintFlag("title")])
-
-            propertiesRunner.run(url, on_output=collect_line)
-
-            if len(output_lines) > 0:
-                self.title = output_lines[0]
+            self.youtube_video = YouTubeVideo(video_id=video_id,
+                                              subtitles=subtitles,
+                                              formats=formats,
+                                              title=youtube_video_api_properties.get("title"),
+                                              duration=youtube_video_api_properties.get("duration"),
+                                              thumbnail=youtube_video_api_properties.get("thumbnail"))
 
         except Exception as e:
             logger.error("AppController error. When setup video properties, subprocess error: %s", str(e))
-            self.subtitles = Subtitles([], [])
-            self.formats = []
             raise YTDLRuntimeError(e) from e
 
     def get_subtitles(self) -> Subtitles:
         """Get subtitles"""
-        return self.subtitles
+        if self.youtube_video:
+            return self.youtube_video.subtitles
+        else:
+            return Subtitles([], [])
 
     def get_formats(self) -> list[dict[str, str]]:
         """Get formats"""
-        return self.formats
+        if self.youtube_video:
+            return self.youtube_video.formats
+        else:
+            return []
 
     def get_title(self) -> str:
         """Get title"""
-        return self.title
+        if self.youtube_video:
+            return self.youtube_video.title
+        else:
+            return ""
+
+    def get_duration(self) -> str:
+        """Get duration"""
+        if self.youtube_video:
+            return format_duration(self.youtube_video.duration)
+        else:
+            return ""
+
+    def get_thumbnail(self) -> str:
+        """Get thumbnail"""
+        if self.youtube_video:
+            return self.youtube_video.thumbnail
+        else:
+            return ""
 
     def add_flag(self, flag: BaseFlag) -> None:
         """Add flag"""
