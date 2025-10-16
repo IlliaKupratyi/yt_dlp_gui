@@ -3,6 +3,7 @@ Application
 """
 import customtkinter as ctk
 from src.controller.app_controller import AppController
+from src.core.config.config import API_TOKEN
 from src.view.main_window import MainWindow
 
 class App:
@@ -10,7 +11,7 @@ class App:
     def __init__(self) -> None:
         ctk.set_appearance_mode("dark")
         self.root = ctk.CTk()
-        self.controller = AppController()
+        self.controller = AppController(API_TOKEN)
         self.height = 700
         self.width = 1200
         self.main_window = MainWindow(self.root, self.controller, width=self.width)

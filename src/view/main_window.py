@@ -114,7 +114,10 @@ class MainWindow:
     def _show_download_settings(self) -> None:
         """Display video info and download settings after metadata is loaded"""
         self.progress_indicator.pack_forget()
-        self.video_info_panel.set_title(self.controller.get_title())
+        self.video_info_panel.set_properties(title=self.controller.get_title(),
+                                             thumbnail=self.controller.get_thumbnail(),
+                                             duration=self.controller.get_duration(),
+                                             url=self.controller.url)
         self.video_info_panel.pack(pady=(0, 15), padx=20, fill="x")
 
         self.download_settings.pack(pady=(0, 15), padx=20, fill="x")

@@ -1,8 +1,12 @@
 """App Controller. Connect view and logic"""
 import subprocess
 import threading
+from io import BytesIO
 from typing import Optional, Callable
 import logging
+import requests
+from PIL import Image
+from PIL.ImageFile import ImageFile
 
 from src.clients.youtube_client import YouTubeClient
 from src.core.dataclass.subtitle import Subtitles
@@ -52,10 +56,12 @@ class AppController:
         logger.info("AppController. Start getting video properties.")
 
         try:
-            video_type, video_id = extract_youtube_id(self.url)
+            url_properties = extract_youtube_id(self.url)
             youtube_video_api_properties: dict[str, str] = {}
-            if video_type == "video":
-                youtube_video_api_properties = self.youtube_client.get_video_list(video_id)
+            if url_properties['type'] == "video":
+                youtube_video_api_properties = self.youtube_client.get_video_list(url_properties['id'])
+
+            thumbnail = self._get_thumbnail_from_link(youtube_video_api_properties['thumbnail'])
 
             propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag()])
             propertiesRunner.run(url, on_output=collect_line)
@@ -71,12 +77,12 @@ class AppController:
             subtitles = subtitles_parse_output(output_lines)
             formats = formats_parse_output(output_lines)
 
-            self.youtube_video = YouTubeVideo(video_id=video_id,
+            self.youtube_video = YouTubeVideo(video_id=url_properties['id'],
                                               subtitles=subtitles,
                                               formats=formats,
                                               title=youtube_video_api_properties.get("title"),
                                               duration=youtube_video_api_properties.get("duration"),
-                                              thumbnail=youtube_video_api_properties.get("thumbnail"))
+                                              thumbnail=thumbnail)
 
         except Exception as e:
             logger.error("AppController error. When setup video properties, subprocess error: %s", str(e))
@@ -110,12 +116,12 @@ class AppController:
         else:
             return ""
 
-    def get_thumbnail(self) -> str:
+    def get_thumbnail(self) -> Optional[ImageFile]:
         """Get thumbnail"""
         if self.youtube_video:
             return self.youtube_video.thumbnail
         else:
-            return ""
+            return None
 
     def add_flag(self, flag: BaseFlag) -> None:
         """Add flag"""
@@ -159,3 +165,16 @@ class AppController:
         self.download_thread = threading.Thread(target=download_task, daemon=True)
         self.download_thread.start()
         return self.download_thread
+
+    @staticmethod
+    def _get_thumbnail_from_link(link: str) -> Optional[ImageFile]:
+        """Get thumbnail from link"""
+        try:
+            url = link.strip()
+            response = requests.get(url, timeout=5)
+            response.raise_for_status()
+            img_data = BytesIO(response.content)
+            return Image.open(img_data)
+        except Exception as e:
+            logger.error("AppController error. When downloading video properties: %s", str(e))
+            return None
