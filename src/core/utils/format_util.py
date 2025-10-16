@@ -66,7 +66,6 @@ def format_duration(duration: str) -> str:
 
         if hours:
             return f"{hours}:{minutes:02d}:{seconds:02d}"
-        else:
-            return f"{minutes}:{seconds:02d}"
-    except Exception:
+        return f"{minutes}:{seconds:02d}"
+    except (KeyError, TypeError, ValueError):
         return "0:00"

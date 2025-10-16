@@ -51,7 +51,6 @@ def extract_youtube_id(url: str):
     if path == '/watch':
         video_id = query_params.get('v', [None])[0]
         if video_id and re.match(r'^[a-zA-Z0-9_-]{11}$', video_id):
-            # Проверяем, есть ли плейлист в параметрах (list=...)
             playlist_id = query_params.get('list', [None])[0]
             if playlist_id and re.match(r'^[a-zA-Z0-9_-]+$', playlist_id):
                 return {'type': 'playlist', 'id': playlist_id}

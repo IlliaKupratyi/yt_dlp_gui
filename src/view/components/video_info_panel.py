@@ -38,7 +38,7 @@ class VideoInfoPanel(ctk.CTkFrame):
         self.duration_label.pack(pady=(0, 10))
 
     def set_properties(self, title: str, thumbnail: Image, duration: str, url: str) -> None:
-        """Update displayed title."""
+        """Update displayed information."""
         self.title_label.configure(text=title)
         self.duration_label.configure(text=f"Duration: {duration}")
         self.video_url = url
@@ -49,11 +49,11 @@ class VideoInfoPanel(ctk.CTkFrame):
                 dark_image=thumbnail,
                 size=(320, 180)
             )
-            self.thumbnail_label.configure(image=ctk_image, text="")
-        except Exception:
+            self.thumbnail_label.configure(image=ctk_image, text="", cursor="hand2")
+        except (ValueError, TypeError, AttributeError):
             self.thumbnail_label.configure(image=None, text="Thumbnail unavailable")
 
-    def _on_click(self, event: Any) -> None:
+    def _on_click(self, _: Any) -> None:
         """Open video in web browser when clicked."""
         if self.video_url:
             webbrowser.open(self.video_url)

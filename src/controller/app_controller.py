@@ -7,6 +7,7 @@ import logging
 import requests
 from PIL import Image
 from PIL.ImageFile import ImageFile
+from urllib3.exceptions import RequestError
 
 from src.clients.youtube_client import YouTubeClient
 from src.core.dataclass.subtitle import Subtitles
@@ -92,36 +93,31 @@ class AppController:
         """Get subtitles"""
         if self.youtube_video:
             return self.youtube_video.subtitles
-        else:
-            return Subtitles([], [])
+        return Subtitles([], [])
 
     def get_formats(self) -> list[dict[str, str]]:
         """Get formats"""
         if self.youtube_video:
             return self.youtube_video.formats
-        else:
-            return []
+        return []
 
     def get_title(self) -> str:
         """Get title"""
         if self.youtube_video:
             return self.youtube_video.title
-        else:
-            return ""
+        return ""
 
     def get_duration(self) -> str:
         """Get duration"""
         if self.youtube_video:
             return format_duration(self.youtube_video.duration)
-        else:
-            return ""
+        return ""
 
     def get_thumbnail(self) -> Optional[ImageFile]:
         """Get thumbnail"""
         if self.youtube_video:
             return self.youtube_video.thumbnail
-        else:
-            return None
+        return None
 
     def add_flag(self, flag: BaseFlag) -> None:
         """Add flag"""
@@ -175,6 +171,6 @@ class AppController:
             response.raise_for_status()
             img_data = BytesIO(response.content)
             return Image.open(img_data)
-        except Exception as e:
+        except (TypeError, ValueError, RequestError) as e:
             logger.error("AppController error. When downloading video properties: %s", str(e))
             return None

@@ -1,12 +1,22 @@
+"""
+Client to make API requests to YouTube
+"""
+import logging
+
 from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+
+logger = logging.getLogger("yt_dlp_gui")
 
 
 class YouTubeClient:
+    """Class for making API requests to YouTube"""
     def __init__(self, api_key: str):
         self.api_key: str = api_key
         self.youtube_client = build("youtube", "v3", developerKey=api_key)
 
     def get_video_list(self, video_id: str) -> dict[str, str]:
+        """Function for getting video list from YouTube API"""
         try:
             request = self.youtube_client.videos().list(part="contentDetails,snippet", id=video_id)
             response = request.execute()
@@ -38,6 +48,6 @@ class YouTubeClient:
 
             return youtube_video
 
-        except Exception as e:
-            print(e)
+        except (HttpError, KeyError, TypeError) as e:
+            logger.error("YouTubeClient error. When requesting API videos.list: %s", str(e))
             return {}
