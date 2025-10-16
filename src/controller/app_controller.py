@@ -51,7 +51,7 @@ class AppController:
         logger.info("AppController. Start getting video properties.")
 
         try:
-            propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag(), PrintFlag("title")])
+            propertiesRunner.add_flag([ListSubsFlag(), FormatListFlag()])
             propertiesRunner.run(url, on_output=collect_line)
 
             if has_error(output_lines):
